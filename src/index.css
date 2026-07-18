@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base reset & scrollbar ─────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #FAFAFA;
+  color: #334155;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Styled scrollbar */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #F1F5F9; }
+::-webkit-scrollbar-thumb  { background: #6366F1; border-radius: 3px; }
+
+/* ─── Modern light-theme utilities ──────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply bg-white border border-slate-200 rounded-2xl;
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05), 0 2px 10px -1px rgba(0,0,0,0.03);
+  }
+
+  .glass-input {
+    @apply w-full bg-white border border-slate-200 rounded-r-sm px-4 py-3 text-slate-800
+           placeholder-slate-400 outline-none transition-all duration-200;
+  }
+
+  .glass-input:focus {
+    @apply border-brand-primary bg-white;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  }
+
+  .btn-primary {
+    @apply w-full py-3 px-5 rounded-r-sm font-semibold text-white transition-all duration-200
+           bg-brand-primary hover:bg-brand-primaryHover active:scale-[0.98] disabled:opacity-50
+           disabled:cursor-not-allowed shadow-sm;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply w-full py-3 px-5 rounded-r-sm font-semibold text-brand-primary border border-slate-200
+           bg-white hover:bg-slate-50 transition-all duration-200 active:scale-[0.98] shadow-sm;
+  }
+
+  .otp-input {
+    @apply w-12 h-14 text-center text-xl font-bold bg-white border border-slate-200
+           rounded-r-sm text-slate-900 outline-none transition-all duration-200;
+  }
+
+  .otp-input:focus {
+    @apply border-brand-primary;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+}
+
+/* ─── Animated mesh background dots ──────────────────────────────── */
+.bg-dots::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(124,58,237,0.08) 1px, transparent 0);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Glow orbs (decorative) ─────────────────────────────────────── */
+.glow-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulse 6s ease-in-out infinite;
+}

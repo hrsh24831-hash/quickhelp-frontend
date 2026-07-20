@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MapPin, Home, Briefcase } from 'lucide-react'
 import Navbar from '../../components/Navbar'
 import api from '../../api/axiosClient'
 
@@ -25,7 +26,13 @@ async function reverseGeocodeStructured(lat, lng) {
 const AREAS = ['Delhi','Gurgaon','Noida','Faridabad','Mumbai','Pune','Ahmedabad','Surat','Bangalore','Chennai','Hyderabad','Kochi','Kolkata']
 const TIME_SLOTS = ['09:00 AM','11:00 AM','01:00 PM','03:00 PM','05:00 PM','07:00 PM','09:00 PM','11:00 PM']
 
-const LABEL_ICONS = { Home: '\u{1F3E0}', Work: '\u{1F4BC}', Other: '\u{1F4CD}' }
+const getAddressIcon = (label) => {
+  switch (label) {
+    case 'Home': return <Home size={15} className="text-slate-500" />;
+    case 'Work': return <Briefcase size={15} className="text-slate-500" />;
+    default:     return <MapPin size={15} className="text-slate-500" />;
+  }
+}
 const LABELS = ['Home', 'Work', 'Other']
 const EMPTY_FORM = { label: 'Home', addressLine: '', locality: '', city: '', pincode: '', lat: null, lng: null }
 
@@ -237,14 +244,14 @@ export default function BookingPreview() {
               {error && <div className="bg-red-500/10 border border-red-500/20 text-red-300 text-sm px-4 py-2.5 rounded-none">{error}</div>}
               <div>
                 <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Service</label>
-                <select id="select-service-input" className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 focus:outline-none focus:border-slate-900 transition-colors text-sm" value={serviceId} onChange={e => setServiceId(e.target.value)}>
+                <select id="select-service-input" className="input py-2.5 text-sm cursor-pointer" value={serviceId} onChange={e => setServiceId(e.target.value)}>
                   {services.map(s => <option key={s._id} value={s._id} className="bg-white text-slate-800">{s.serviceName}</option>)}
                 </select>
               </div>
               <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Time Slot</label>
-                  <select id="select-time-input" className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 focus:outline-none focus:border-slate-900 transition-colors text-sm" value={timeSlot} onChange={e => setTimeSlot(e.target.value)}>
+                  <select id="select-time-input" className="input py-2.5 text-sm cursor-pointer" value={timeSlot} onChange={e => setTimeSlot(e.target.value)}>
                     {TIME_SLOTS.map(t => <option key={t} value={t} className="bg-white text-slate-800">{t}</option>)}
                   </select>
                 </div>
@@ -267,18 +274,17 @@ export default function BookingPreview() {
                 <div className="space-y-2.5">
                   {addresses.map(addr => {
                     const isSelected = addr._id === selectedAddrId
-                    const icon = LABEL_ICONS[addr.label] || '\u{1F4CD}'
                     return (
                       <div key={addr._id} onClick={() => setSelectedAddrId(addr._id)}
-                        className={`relative flex items-start gap-3 p-3.5 rounded-none border cursor-pointer transition-all group ${isSelected ? 'border-primary-500/60 bg-primary-500/10 ring-1 ring-primary-500/30' : 'border-white/8 bg-white/3 hover:border-white/20 hover:bg-white/5'}`}>
-                        <div className={`mt-0.5 w-4 h-4 rounded-none border-2 flex-shrink-0 flex items-center justify-center transition-all ${isSelected ? 'border-primary-400 bg-primary-500' : 'border-white/20'}`}>
+                        className={`relative flex items-start gap-3 p-3.5 rounded-none border cursor-pointer transition-all group ${isSelected ? 'border-slate-900 bg-slate-50 ring-1 ring-slate-900' : 'border-slate-200 bg-white hover:border-slate-300'}`}>
+                        <div className={`mt-0.5 w-4 h-4 rounded-none border-2 flex-shrink-0 flex items-center justify-center transition-all ${isSelected ? 'border-slate-900 bg-slate-900' : 'border-slate-300'}`}>
                           {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-none" />}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-0.5">
-                            <span className="text-sm">{icon}</span>
-                            <span className={`text-xs font-bold uppercase tracking-wider ${isSelected ? 'text-amber-700' : 'text-slate-500'}`}>{addr.label}</span>
-                            {addr.isDefault && <span className="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-mono">DEFAULT</span>}
+                            <span className="flex items-center">{getAddressIcon(addr.label)}</span>
+                            <span className={`text-[10px] font-bold uppercase tracking-wider ${isSelected ? 'text-slate-800' : 'text-slate-500'}`}>{addr.label}</span>
+                            {addr.isDefault && <span className="text-[9px] border border-emerald-500 text-emerald-600 px-1.5 py-0.5 rounded-none font-mono tracking-wider uppercase font-semibold">DEFAULT</span>}
                           </div>
                           <p className="text-sm text-slate-800 font-medium leading-snug">{addr.addressLine}</p>
                           {(addr.locality || addr.city) && (
@@ -286,7 +292,7 @@ export default function BookingPreview() {
                           )}
                         </div>
                         <button type="button" onClick={e => { e.stopPropagation(); handleDeleteAddress(addr._id) }}
-                          className="opacity-0 group-hover:opacity-100 flex-shrink-0 text-slate-500 hover:text-red-400 transition-all p-1 rounded-none hover:bg-red-500/10" title="Remove">
+                          className="opacity-0 group-hover:opacity-100 flex-shrink-0 text-slate-500 hover:text-red-400 transition-all p-1 rounded-none hover:bg-red-50" title="Remove">
                           <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                             <path fillRule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.58.22-2.365.468A.75.75 0 003 5.41v.538a.75.75 0 00.75.75h12.5A.75.75 0 0017 5.948V5.41a.75.75 0 00-.635-.749A22.1 22.1 0 0014 4.193v-.443A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM5 8a.75.75 0 01.75.75v6.5c0 .414.336.75.75.75h7a.75.75 0 00.75-.75v-6.5A.75.75 0 0115 8a.75.75 0 01.75.75v6.5A2.25 2.25 0 0113.5 17.5h-7A2.25 2.25 0 014.25 15.25v-6.5A.75.75 0 015 8z" clipRule="evenodd"/>
                           </svg>
@@ -299,25 +305,25 @@ export default function BookingPreview() {
 
               {addresses.length === 0 && !showForm && (
                 <div className="text-center py-6 text-slate-500">
-                  <div className="text-3xl mb-2">{'\u{1F4CD}'}</div>
+                  <div className="flex justify-center text-slate-300 mb-2"><MapPin size={32} /></div>
                   <p className="text-sm">No saved addresses yet.</p>
                   <p className="text-xs mt-1">Click "+ Add Address" above to add one.</p>
                 </div>
               )}
 
               {showForm && (
-                <div className="border border-none rounded-none p-4 space-y-4 bg-white/3">
+                <div className="border border-slate-200 rounded-none p-4 space-y-4 bg-slate-50/50">
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-sm font-semibold text-slate-800">New Address</p>
                     <button type="button" onClick={() => { setShowForm(false); setGeoMsg('') }} className="text-slate-500 hover:text-slate-800 text-lg leading-none transition-colors">&times;</button>
                   </div>
 
                   <button type="button" id="detect-location-btn" onClick={handleDetectLocation} disabled={geoLoading}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-none text-sm font-semibold border transition-all ${geoLoading ? 'bg-primary-500/10 border-none text-amber-800 cursor-not-allowed' : 'bg-primary-500/15 border-primary-500/40 text-amber-700 hover:bg-primary-500/25 hover:border-primary-500/70 hover:text-slate-800'}`}>
+                    className={`w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-none text-sm font-semibold border transition-all ${geoLoading ? 'bg-slate-100 border-none text-slate-400 cursor-not-allowed' : 'bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200 hover:text-slate-800'}`}>
                     {geoLoading ? (
                       <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>Detecting location&hellip;</>
                     ) : (
-                      <>{'\u{1F4CD}'} Auto-detect My Location</>
+                      <><MapPin size={15} /> Auto-detect My Location</>
                     )}
                   </button>
 

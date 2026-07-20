@@ -73,15 +73,15 @@ export default function EarningsPage() {
             <main className="max-w-4xl mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-8">
                     <div>
-                        <h1 className="text-2xl font-bold text-white mb-1">Provider Earnings</h1>
-                        <p className="text-slate-400 text-sm">Monitor your income and claim payouts</p>
+                        <h1 className="text-2xl font-bold text-slate-800 mb-1">Provider Earnings</h1>
+                        <p className="text-slate-500 text-sm">Monitor your income and claim payouts</p>
                     </div>
                     {completedPaid.length > 0 && (
                         <button
                             id="request-payout-btn"
                             onClick={handlePayoutRequest}
                             disabled={requesting}
-                            className="inline-flex items-center text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-xl transition-all disabled:opacity-50"
+                            className="inline-flex items-center text-sm font-semibold text-slate-800 bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-none transition-all disabled:opacity-50"
                         >
                             {requesting ? 'Requesting…' : 'Request Payout'}
                         </button>
@@ -89,13 +89,13 @@ export default function EarningsPage() {
                 </div>
 
                 {message && (
-                    <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl text-sm">
+                    <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-none text-sm">
                         {message}
                     </div>
                 )}
 
                 {error && (
-                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm">
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-none text-sm">
                         {error}
                     </div>
                 )}
@@ -103,33 +103,33 @@ export default function EarningsPage() {
                 {loading ? (
                     <div className="grid grid-cols-3 gap-4 mb-8">
                         {[1, 2, 3].map(i => (
-                            <div key={i} className="glass-card p-6 animate-pulse h-28" />
+                            <div key={i} className="card p-6 animate-pulse h-28" />
                         ))}
                     </div>
                 ) : (
                     <>
                         {/* Statistics Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div className="glass-card p-6">
+                            <div className="card p-6">
                                 <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Total Earned (Paid)</p>
-                                <p className="text-3xl font-extrabold text-white">{formatCurrency(totalEarned)}</p>
-                                <p className="text-[10px] text-slate-400 mt-1">From completed and paid services</p>
+                                <p className="text-3xl font-extrabold text-slate-800">{formatCurrency(totalEarned)}</p>
+                                <p className="text-[10px] text-slate-500 mt-1">From completed and paid services</p>
                             </div>
-                            <div className="glass-card p-6">
+                            <div className="card p-6">
                                 <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Completed (Unpaid)</p>
                                 <p className="text-3xl font-extrabold text-amber-400">{formatCurrency(completedUnpaid.reduce((sum, b) => sum + (b.finalPrice || 0), 0))}</p>
-                                <p className="text-[10px] text-slate-400 mt-1">Awaiting customer invoice payment</p>
+                                <p className="text-[10px] text-slate-500 mt-1">Awaiting customer invoice payment</p>
                             </div>
-                            <div className="glass-card p-6">
+                            <div className="card p-6">
                                 <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Active Job Pipelines</p>
                                 <p className="text-3xl font-extrabold text-purple-300">{activeJobs.length}</p>
-                                <p className="text-[10px] text-slate-400 mt-1">Jobs currently in progress</p>
+                                <p className="text-[10px] text-slate-500 mt-1">Jobs currently in progress</p>
                             </div>
                         </div>
 
                         {/* Booking List */}
-                        <div className="glass-card p-6">
-                            <h2 className="text-lg font-bold text-white mb-4">Completed Bookings Log</h2>
+                        <div className="card p-6">
+                            <h2 className="text-lg font-bold text-slate-800 mb-4">Completed Bookings Log</h2>
                             {completedPaid.length === 0 && completedUnpaid.length === 0 ? (
                                 <p className="text-slate-500 text-sm py-4 text-center">No completed bookings recorded yet.</p>
                             ) : (
@@ -137,12 +137,12 @@ export default function EarningsPage() {
                                     {[...completedPaid, ...completedUnpaid].map((b, i) => (
                                         <div key={b._id || i} className="py-4 flex justify-between items-center text-sm first:pt-0 last:pb-0">
                                             <div>
-                                                <p className="text-white font-semibold">{b.serviceId?.serviceName}</p>
-                                                <p className="text-slate-400 text-xs mt-0.5 font-mono">{b.bookingID} · {b.area}</p>
+                                                <p className="text-slate-800 font-semibold">{b.serviceId?.serviceName}</p>
+                                                <p className="text-slate-500 text-xs mt-0.5 font-mono">{b.bookingID} · {b.area}</p>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-white font-bold">{formatCurrency(b.finalPrice)}</p>
-                                                <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${
+                                                <p className="text-slate-800 font-bold">{formatCurrency(b.finalPrice)}</p>
+                                                <span className={`inline-block px-2.5 py-0.5 rounded-none text-[10px] font-semibold border ${
                                                     b.paymentStatus === 'paid'
                                                         ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                                                         : 'bg-amber-500/20 text-amber-300 border-amber-500/30'

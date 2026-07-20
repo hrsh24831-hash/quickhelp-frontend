@@ -130,15 +130,15 @@ export default function OtpPage() {
   return (
     <div className="min-h-screen bg-dots flex items-center justify-center px-4 relative overflow-hidden">
       {/* Glow orbs */}
-      <div className="glow-orb w-80 h-80 bg-primary-600/15 -top-10 -right-16" />
-      <div className="glow-orb w-56 h-56 bg-purple-900/25 bottom-16 left-6" />
+      <div className="glow-orb w-80 h-80 bg-slate-900/5 -top-10 -right-16" />
+      <div className="glow-orb w-56 h-56 bg-slate-900/5 bottom-16 left-6" />
 
       <div className="relative z-10 w-full max-w-md animate-slide-up">
         {/* Back button */}
         <button
           id="back-to-login-btn"
           onClick={() => { clearPendingEmail(); navigate('/login') }}
-          className="flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors mb-6 text-sm"
+          className="flex items-center gap-1.5 text-slate-500 hover:text-slate-800 transition-colors mb-6 text-sm"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -147,17 +147,17 @@ export default function OtpPage() {
         </button>
 
         {/* Card */}
-        <div className="glass-card p-8">
+        <div className="card p-8">
           {/* Icon */}
-          <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary-500/15 border border-primary-500/20 mb-5 mx-auto">
-            <svg className="w-7 h-7 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="flex items-center justify-center w-14 h-14 rounded-none bg-primary-500/15 border border-primary-500/20 mb-5 mx-auto">
+            <svg className="w-7 h-7 text-amber-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z" />
             </svg>
           </div>
 
-          <h2 className="text-xl font-semibold text-white text-center mb-1">Check your inbox</h2>
-          <p className="text-slate-400 text-sm text-center mb-6">
-            We sent a 6-digit code to <span className="text-primary-300 font-medium">{maskedEmail}</span>
+          <h2 className="text-xl font-semibold text-slate-800 text-center mb-1">Check your inbox</h2>
+          <p className="text-slate-500 text-sm text-center mb-6">
+            We sent a 6-digit code to <span className="text-amber-700 font-medium">{maskedEmail}</span>
           </p>
 
           {/* OTP input boxes */}
@@ -210,14 +210,14 @@ export default function OtpPage() {
           <div className="text-center mt-5">
             {countdown > 0 ? (
               <p className="text-slate-500 text-sm">
-                Resend code in <span className="text-primary-400 font-mono font-medium">{countdown}s</span>
+                Resend code in <span className="text-amber-800 font-mono font-medium">{countdown}s</span>
               </p>
             ) : (
               <button
                 id="resend-otp-btn"
                 onClick={handleResend}
                 disabled={resending}
-                className="text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors"
+                className="text-amber-800 hover:text-amber-700 text-sm font-medium transition-colors"
               >
                 {resending ? 'Resending…' : 'Resend code'}
               </button>

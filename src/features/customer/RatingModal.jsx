@@ -43,18 +43,18 @@ export default function RatingModal({ booking, onClose, onSubmitted }) {
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 15 }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className="bg-white border border-slate-200 w-full max-w-md p-7 relative rounded-r-md shadow-brand-elevated"
+        className="bg-white border border-none w-full max-w-md p-7 relative rounded-r-md shadow-none-brand-elevated"
       >
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl leading-none transition-colors"
+          className="absolute top-4 right-4 text-slate-500 hover:text-slate-600 text-xl leading-none transition-colors"
         >×</button>
 
         {/* Header */}
         <div className="text-center mb-6">
           <div className="text-4xl mb-2">⭐</div>
-          <h2 className="text-xl font-bold text-slate-900">Rate Your Service</h2>
+          <h2 className="text-xl font-bold text-slate-800">Rate Your Service</h2>
           <p className="text-slate-500 text-sm mt-1">
             {booking.serviceName} · {booking.bookingID}
           </p>
@@ -69,7 +69,7 @@ export default function RatingModal({ booking, onClose, onSubmitted }) {
               onMouseLeave={() => setHovered(0)}
               onClick={() => setScore(n)}
               className={`text-4xl transition-transform duration-100 ${
-                n <= display ? 'text-yellow-400 scale-110' : 'text-slate-200 hover:scale-105 hover:text-slate-300'
+                n <= display ? 'text-yellow-400 scale-110' : 'text-slate-200 hover:scale-105 hover:text-slate-600'
               }`}
             >★</button>
           ))}
@@ -85,7 +85,7 @@ export default function RatingModal({ booking, onClose, onSubmitted }) {
           placeholder="Share your experience (optional)…"
           rows={3}
           maxLength={500}
-          className="w-full bg-white border border-slate-200 rounded-r-sm px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 resize-none mb-4 transition-all"
+          className="w-full bg-white border border-none rounded-none px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/10 resize-none mb-4 transition-all"
         />
 
         {error && (
@@ -95,14 +95,14 @@ export default function RatingModal({ booking, onClose, onSubmitted }) {
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-800 border border-slate-200 hover:bg-slate-50 rounded-r-sm transition-all"
+            className="flex-1 py-2.5 text-sm font-semibold text-slate-600 hover:text-slate-800 border border-none hover:bg-slate-50 rounded-none transition-all"
           >
             Skip
           </button>
           <button
             onClick={handleSubmit}
             disabled={loading || score < 1}
-            className="flex-1 py-2.5 text-sm font-semibold bg-brand-primary hover:bg-brand-primaryHover text-white rounded-r-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 text-sm font-semibold bg-brand-primary hover:bg-brand-primaryHover text-slate-800 rounded-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Submitting…' : 'Submit Rating'}
           </button>

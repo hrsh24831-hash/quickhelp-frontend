@@ -22,7 +22,7 @@ const EMPTY_FORM = {
 // ── Small badge ─────────────────────────────────────────────────────
 function CategoryBadge({ category }) {
   return (
-    <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-primary-500/15 text-primary-300 border border-primary-500/20 capitalize">
+    <span className="inline-flex items-center px-2 py-0.5 rounded-none text-xs font-medium bg-primary-500/15 text-amber-700 border border-primary-500/20 capitalize">
       {category.replace('_', ' ')}
     </span>
   )
@@ -78,13 +78,13 @@ function ServiceModal({ service, onClose, onSaved }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="glass-card w-full max-w-xl max-h-[90vh] overflow-y-auto animate-slide-up">
+      <div className="card w-full max-w-xl max-h-[90vh] overflow-y-auto animate-slide-up">
         {/* Modal header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10">
-          <h2 className="text-lg font-semibold text-white">
+        <div className="flex items-center justify-between p-6 border-b border-none">
+          <h2 className="text-lg font-semibold text-slate-800">
             {isEdit ? 'Edit Service' : 'Add New Service'}
           </h2>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="text-slate-500 hover:text-slate-800 transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -94,7 +94,7 @@ function ServiceModal({ service, onClose, onSaved }) {
         <form id="service-form" onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Service Name *</label>
+            <label className="block text-sm font-medium text-slate-600 mb-1.5">Service Name *</label>
             <input
               id="form-service-name"
               type="text"
@@ -102,18 +102,18 @@ function ServiceModal({ service, onClose, onSaved }) {
               onChange={(e) => set('serviceName', e.target.value)}
               required
               placeholder="e.g. Bathroom Deep Clean"
-              className="glass-input"
+              className="input"
             />
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Category *</label>
+            <label className="block text-sm font-medium text-slate-600 mb-1.5">Category *</label>
             <select
               id="form-category"
               value={form.category}
               onChange={(e) => set('category', e.target.value)}
-              className="glass-input cursor-pointer"
+              className="input cursor-pointer"
             >
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>{c.replace('_', ' ')}</option>
@@ -124,7 +124,7 @@ function ServiceModal({ service, onClose, onSaved }) {
           {/* Price + Time */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">Base Price (₹) *</label>
+              <label className="block text-sm font-medium text-slate-600 mb-1.5">Base Price (₹) *</label>
               <input
                 id="form-base-price"
                 type="number"
@@ -133,11 +133,11 @@ function ServiceModal({ service, onClose, onSaved }) {
                 onChange={(e) => set('basePrice', e.target.value)}
                 required
                 placeholder="499"
-                className="glass-input"
+                className="input"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-1.5">ETA (minutes) *</label>
+              <label className="block text-sm font-medium text-slate-600 mb-1.5">ETA (minutes) *</label>
               <input
                 id="form-base-time"
                 type="number"
@@ -146,27 +146,27 @@ function ServiceModal({ service, onClose, onSaved }) {
                 onChange={(e) => set('baseTime', e.target.value)}
                 required
                 placeholder="60"
-                className="glass-input"
+                className="input"
               />
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1.5">Description</label>
+            <label className="block text-sm font-medium text-slate-600 mb-1.5">Description</label>
             <textarea
               id="form-description"
               rows={3}
               value={form.description}
               onChange={(e) => set('description', e.target.value)}
               placeholder="Brief description of the service…"
-              className="glass-input resize-none"
+              className="input resize-none"
             />
           </div>
 
           {/* Areas available */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-slate-600 mb-2">
               Areas Available
               <span className="ml-2 text-slate-500 font-normal text-xs">({form.areasAvailable.length} selected)</span>
             </label>
@@ -179,10 +179,10 @@ function ServiceModal({ service, onClose, onSaved }) {
                     type="button"
                     id={`area-toggle-${area}`}
                     onClick={() => toggleArea(area)}
-                    className={`text-xs px-2 py-1.5 rounded-lg border transition-all ${
+                    className={`text-xs px-2 py-1.5 rounded-none border transition-all ${
                       selected
                         ? 'bg-primary-500/25 border-primary-500/50 text-primary-200'
-                        : 'bg-white/5 border-white/10 text-slate-400 hover:border-white/20'
+                        : 'bg-white/5 border-none text-slate-500 hover:border-white/20'
                     }`}
                   >
                     {area}
@@ -227,11 +227,11 @@ function ServiceModal({ service, onClose, onSaved }) {
 function ConfirmDialog({ service, onClose, onConfirm, loading }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="glass-card w-full max-w-sm p-6 text-center animate-slide-up">
+      <div className="card w-full max-w-sm p-6 text-center animate-slide-up">
         <div className="text-4xl mb-3">⚠️</div>
-        <h3 className="text-lg font-semibold text-white mb-2">Deactivate Service?</h3>
-        <p className="text-slate-400 text-sm mb-5">
-          <strong className="text-white">{service.serviceName}</strong> will be hidden from customers.
+        <h3 className="text-lg font-semibold text-slate-800 mb-2">Deactivate Service?</h3>
+        <p className="text-slate-500 text-sm mb-5">
+          <strong className="text-slate-800">{service.serviceName}</strong> will be hidden from customers.
           Existing bookings are not affected. You can reactivate it later.
         </p>
         <div className="flex gap-3">
@@ -240,7 +240,7 @@ function ConfirmDialog({ service, onClose, onConfirm, loading }) {
             id="confirm-deactivate-btn"
             onClick={onConfirm}
             disabled={loading}
-            className="flex-1 py-3.5 rounded-xl font-semibold text-white bg-red-600 hover:bg-red-500 transition-all disabled:opacity-50"
+            className="flex-1 py-3.5 rounded-none font-semibold text-slate-800 bg-red-600 hover:bg-red-500 transition-all disabled:opacity-50"
           >
             {loading ? 'Deactivating…' : 'Deactivate'}
           </button>
@@ -310,13 +310,13 @@ export default function ManageServices() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6 animate-fade-in">
           <div>
-            <h1 className="text-2xl font-bold text-white">Manage Services</h1>
-            <p className="text-slate-400 text-sm mt-0.5">Create, edit and deactivate service listings</p>
+            <h1 className="text-2xl font-bold text-slate-800">Manage Services</h1>
+            <p className="text-slate-500 text-sm mt-0.5">Create, edit and deactivate service listings</p>
           </div>
           <button
             id="add-service-btn"
             onClick={() => { setEditTarget(null); setModalOpen(true) }}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm font-semibold hover:from-primary-500 hover:to-primary-400 transition-all shadow-lg shadow-primary-500/25"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-none bg-gradient-to-r from-primary-600 to-primary-500 text-slate-800 text-sm font-semibold hover:from-primary-500 hover:to-primary-400 transition-all shadow-none-none shadow-none-primary-500/25"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -332,11 +332,11 @@ export default function ManageServices() {
             { label: 'Active',         value: totalActive,     icon: '✅' },
             { label: 'Inactive',       value: services.length - totalActive, icon: '⏸️' },
           ].map((stat) => (
-            <div key={stat.label} className="glass-card p-4 flex items-center gap-3">
+            <div key={stat.label} className="card p-4 flex items-center gap-3">
               <span className="text-2xl">{stat.icon}</span>
               <div>
-                <div className="text-xl font-bold text-white">{stat.value}</div>
-                <div className="text-xs text-slate-400">{stat.label}</div>
+                <div className="text-xl font-bold text-slate-800">{stat.value}</div>
+                <div className="text-xs text-slate-500">{stat.label}</div>
               </div>
             </div>
           ))}
@@ -349,10 +349,10 @@ export default function ManageServices() {
               key={f}
               id={`filter-tab-${f}`}
               onClick={() => setFilter(f)}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all capitalize ${
+              className={`px-4 py-1.5 rounded-none text-sm font-medium transition-all capitalize ${
                 filter === f
-                  ? 'bg-primary-500/20 text-primary-300 border border-primary-500/30'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-slate-900 text-slate-800 border border-none'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               {f}
@@ -362,24 +362,24 @@ export default function ManageServices() {
 
         {/* Table */}
         {loading ? (
-          <div className="glass-card p-8 text-center text-slate-400 animate-pulse">Loading services…</div>
+          <div className="card p-8 text-center text-slate-500 animate-pulse">Loading services…</div>
         ) : displayed.length === 0 ? (
-          <div className="glass-card p-12 text-center">
+          <div className="card p-12 text-center">
             <div className="text-4xl mb-3">📭</div>
-            <p className="text-slate-400">No services found.</p>
+            <p className="text-slate-500">No services found.</p>
           </div>
         ) : (
-          <div className="glass-card overflow-hidden animate-fade-in">
+          <div className="card overflow-hidden animate-fade-in">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Service</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:table-cell">Category</th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Price</th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider hidden md:table-cell">ETA</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Actions</th>
+                  <tr className="border-b border-none">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Service</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider hidden sm:table-cell">Category</th>
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Price</th>
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider hidden md:table-cell">ETA</th>
+                    <th className="px-4 py-3 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
@@ -390,7 +390,7 @@ export default function ManageServices() {
                       className="hover:bg-white/[0.02] transition-colors"
                     >
                       <td className="px-4 py-3">
-                        <div className="font-medium text-white">{service.serviceName}</div>
+                        <div className="font-medium text-slate-800">{service.serviceName}</div>
                         {service.description && (
                           <div className="text-xs text-slate-500 mt-0.5 line-clamp-1">{service.description}</div>
                         )}
@@ -398,13 +398,13 @@ export default function ManageServices() {
                       <td className="px-4 py-3 hidden sm:table-cell">
                         <CategoryBadge category={service.category} />
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold text-white">{formatCurrency(service.basePrice)}</td>
-                      <td className="px-4 py-3 text-right text-slate-400 hidden md:table-cell">{service.baseTime}m</td>
+                      <td className="px-4 py-3 text-right font-semibold text-slate-800">{formatCurrency(service.basePrice)}</td>
+                      <td className="px-4 py-3 text-right text-slate-500 hidden md:table-cell">{service.baseTime}m</td>
                       <td className="px-4 py-3 text-center">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-none text-xs font-medium ${
                           service.isActive !== false
                             ? 'bg-green-500/15 text-green-300 border border-green-500/20'
-                            : 'bg-slate-500/15 text-slate-400 border border-slate-500/20'
+                            : 'bg-slate-500/15 text-slate-500 border border-slate-500/20'
                         }`}>
                           {service.isActive !== false ? 'Active' : 'Inactive'}
                         </span>
@@ -414,7 +414,7 @@ export default function ManageServices() {
                           <button
                             id={`edit-btn-${service._id}`}
                             onClick={() => { setEditTarget(service); setModalOpen(true) }}
-                            className="p-1.5 rounded-lg text-slate-400 hover:text-primary-300 hover:bg-primary-500/10 transition-all"
+                            className="p-1.5 rounded-none text-slate-500 hover:text-amber-700 hover:bg-primary-500/10 transition-all"
                             title="Edit"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -425,7 +425,7 @@ export default function ManageServices() {
                             <button
                               id={`delete-btn-${service._id}`}
                               onClick={() => setDeleteTarget(service)}
-                              className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                              className="p-1.5 rounded-none text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all"
                               title="Deactivate"
                             >
                               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

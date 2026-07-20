@@ -10,14 +10,14 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 const MAP_STYLE_DARK = 'https://tiles.openfreemap.org/styles/liberty'
 
 const ProviderPin = () => (
-  <div className="w-9 h-9 bg-primary-600 rounded-full border-4 border-white flex items-center justify-center shadow-lg text-lg animate-bounce">
+  <div className="w-9 h-9 bg-primary-600 rounded-none border-4 border-white flex items-center justify-center shadow-none-none text-lg animate-bounce">
     🛵
   </div>
 )
 
 const DestinationPin = () => (
   <div 
-    className="w-7 h-7 bg-red-500 rounded-full border-4 border-white shadow-md transform -rotate-45"
+    className="w-7 h-7 bg-red-500 rounded-none border-4 border-white shadow-none-none transform -rotate-45"
     style={{ borderRadius: '50% 50% 50% 0' }}
   />
 )
@@ -86,9 +86,9 @@ export default function LiveTrackingMap({ bookingId, providerId, pickup, drop, t
     : { longitude: drop.lng, latitude: drop.lat }
 
   return (
-    <div className="h-[450px] w-full relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+    <div className="h-[450px] w-full relative rounded-none overflow-hidden shadow-none-2xl border border-none">
       {/* Network banner */}
-      <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 bg-black/85 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/10 text-xs font-semibold">
+      <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 bg-black/85 backdrop-blur-md px-3.5 py-2 rounded-none border border-none text-xs font-semibold">
         {isConnected ? (
           <>
             <Wifi size={13} className="text-emerald-400 animate-pulse" />

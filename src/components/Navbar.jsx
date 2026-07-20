@@ -32,9 +32,9 @@ const ROLE_LINKS = {
 }
 
 const ROLE_BADGE = {
-  customer: { label: 'Customer', cls: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
-  provider: { label: 'Provider', cls: 'bg-violet-50 text-violet-700 border-violet-200' },
-  admin:    { label: 'Admin',    cls: 'bg-amber-50  text-amber-700  border-amber-200'  },
+  customer: { label: 'Customer', cls: 'text-amber-400 text-[10px] tracking-widest uppercase font-semibold border border-amber-400/20 px-2 py-0.5 rounded-none' },
+  provider: { label: 'Provider', cls: 'text-amber-400 text-[10px] tracking-widest uppercase font-semibold border border-amber-400/20 px-2 py-0.5 rounded-none' },
+  admin:    { label: 'Admin',    cls: 'text-amber-400 text-[10px] tracking-widest uppercase font-semibold border border-amber-400/20 px-2 py-0.5 rounded-none' },
 }
 
 export default function Navbar() {
@@ -65,27 +65,27 @@ export default function Navbar() {
   const isActive = (to) => location.pathname.startsWith(to)
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-slate-200" style={{ boxShadow: '0 1px 8px rgba(0,0,0,0.06)' }}>
+    <nav className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800" style={{ boxShadow: 'none' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center shadow-sm group-hover:bg-indigo-700 transition-colors">
-            <Zap size={16} className="text-white" strokeWidth={2.5} />
+          <div className="w-8 h-8 rounded-none bg-amber-400 flex items-center justify-center group-hover:bg-amber-500 transition-colors">
+            <Zap size={16} className="text-slate-900" strokeWidth={2.5} />
           </div>
-          <span className="font-bold text-slate-900 text-lg tracking-tight">QuickHelp</span>
+          <span className="font-bold text-white text-lg tracking-tight">Quick<span className="text-amber-400">Help</span></span>
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-0.5">
+        <div className="hidden md:flex items-center gap-2">
           {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
-              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-all ${
+              className={`px-3 py-1.5 text-sm font-medium transition-all ${
                 isActive(link.to)
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  ? 'text-amber-400 underline decoration-amber-400 decoration-2 underline-offset-8'
+                  : 'text-slate-300 hover:text-amber-400'
               }`}
             >
               {link.label}
@@ -97,16 +97,16 @@ export default function Navbar() {
         <div className="flex items-center gap-2.5">
           {/* Role badge */}
           {badge && (
-            <span className={`hidden sm:inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold border ${badge.cls}`}>
+            <span className={`hidden sm:inline-flex items-center ${badge.cls}`}>
               {badge.label}
             </span>
           )}
 
           {/* User name + verified tick */}
-          <span className="hidden md:flex items-center gap-1.5 text-slate-600 text-sm font-medium truncate max-w-[160px]">
+          <span className="hidden md:flex items-center gap-1.5 text-slate-300 text-sm font-medium truncate max-w-[160px]">
             {user?.name || user?.email}
             {role === 'provider' && user?.providerProfile?.isVerified && (
-              <CheckCircle size={14} className="text-emerald-500 shrink-0" strokeWidth={2.5} />
+              <CheckCircle size={14} className="text-amber-400 shrink-0" strokeWidth={2.5} />
             )}
           </span>
 
@@ -114,7 +114,7 @@ export default function Navbar() {
           <button
             id="navbar-logout-btn"
             onClick={handleLogout}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-slate-400 hover:text-white transition-all"
           >
             <LogOut size={16} strokeWidth={2} />
             <span className="hidden sm:inline font-medium">Logout</span>
@@ -122,7 +122,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all"
+            className="md:hidden p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -133,7 +133,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1">
+        <div className="md:hidden border-t border-slate-800 bg-slate-900 px-4 py-3 space-y-1">
           {links.map((link) => (
             <Link
               key={link.to}
@@ -141,8 +141,8 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               className={`block px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 isActive(link.to)
-                  ? 'bg-indigo-50 text-indigo-700 font-semibold'
-                  : 'text-slate-600 hover:bg-slate-100'
+                  ? 'text-amber-400 font-semibold'
+                  : 'text-slate-300 hover:bg-slate-800 hover:text-amber-400'
               }`}
             >
               {link.label}

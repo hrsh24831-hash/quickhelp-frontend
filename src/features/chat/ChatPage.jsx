@@ -29,20 +29,20 @@ function MessageBubble({ msg, isOwn }) {
     return (
         <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} mb-1.5`}>
             <div
-                className={`max-w-xs lg:max-w-md px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                className={`max-w-xs lg:max-w-md px-3.5 py-2.5 rounded-none text-sm leading-relaxed ${
                     isOwn
-                        ? 'bg-primary-600 text-white rounded-br-sm'
+                        ? 'bg-primary-600 text-slate-800 rounded-br-sm'
                         : 'bg-white/10 text-slate-200 rounded-bl-sm'
                 }`}
             >
                 {!isOwn && (
-                    <p className="text-xs text-primary-300 font-semibold mb-0.5">{msg.senderName}</p>
+                    <p className="text-xs text-amber-700 font-semibold mb-0.5">{msg.senderName}</p>
                 )}
                 <p style={{ wordBreak: 'break-word' }}>{msg.text}</p>
                 <div className={`flex items-center gap-1 mt-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
                     <span className="text-xs opacity-50">{formatTime(msg.createdAt)}</span>
                     {isOwn && (
-                        <span className={`text-xs ${isRead ? 'text-blue-300' : 'text-white/40'}`}>
+                        <span className={`text-xs ${isRead ? 'text-blue-300' : 'text-slate-800/40'}`}>
                             {isRead ? '✓✓' : '✓'}
                         </span>
                     )}
@@ -70,11 +70,11 @@ function TypingIndicator({ typingUsers }) {
     return (
         <div className="flex items-center gap-2 px-1 py-2">
             <div className="flex gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
-            <span className="text-xs text-slate-400 italic">{names} {typingUsers.length === 1 ? 'is' : 'are'} typing…</span>
+            <span className="text-xs text-slate-500 italic">{names} {typingUsers.length === 1 ? 'is' : 'are'} typing…</span>
         </div>
     )
 }
@@ -82,12 +82,12 @@ function TypingIndicator({ typingUsers }) {
 // ─── Connection badge ─────────────────────────────────────────────────────────
 function ConnectionBadge({ isConnected }) {
     return (
-        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${
+        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none text-xs font-medium border ${
             isConnected
                 ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
                 : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
         }`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
+            <span className={`w-1.5 h-1.5 rounded-none ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-slate-900'}`} />
             {isConnected ? 'Live' : 'Reconnecting…'}
         </div>
     )
@@ -217,20 +217,20 @@ export default function ChatPage() {
             <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-6 flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
 
                 {/* Header */}
-                <div className="glass-card px-5 py-4 mb-4 flex items-center justify-between animate-fade-in flex-shrink-0">
+                <div className="card px-5 py-4 mb-4 flex items-center justify-between animate-fade-in flex-shrink-0">
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => navigate(-1)}
-                            className="text-slate-400 hover:text-white transition-colors text-xl leading-none"
+                            className="text-slate-500 hover:text-slate-800 transition-colors text-xl leading-none"
                             aria-label="Go back"
                         >
                             ←
                         </button>
                         <div>
-                            <p className="text-white font-semibold text-sm">
+                            <p className="text-slate-800 font-semibold text-sm">
                                 💬 {bookingLoading ? '…' : (booking?.serviceName || booking?.serviceId?.serviceName || 'Booking Chat')}
                             </p>
-                            <p className="text-slate-400 text-xs mt-0.5">
+                            <p className="text-slate-500 text-xs mt-0.5">
                                 Chat with {partnerName}
                                 {booking?.bookingID ? ` · ${booking.bookingID}` : ''}
                             </p>
@@ -241,7 +241,7 @@ export default function ChatPage() {
                         {booking && ['Worker Assigned', 'In Progress'].includes(booking.status) && user?.role === 'customer' && (
                             <Link
                                 to={`/customer/track/${bookingId}`}
-                                className="inline-flex items-center text-xs text-primary-300 hover:text-white border border-primary-500/30 hover:border-primary-500/60 bg-primary-500/10 hover:bg-primary-500/25 px-3 py-1.5 rounded-lg transition-all"
+                                className="inline-flex items-center text-xs text-amber-700 hover:text-slate-800 border border-none hover:border-primary-500/60 bg-primary-500/10 hover:bg-primary-500/25 px-3 py-1.5 rounded-none transition-all"
                             >
                                 🛵 Track
                             </Link>
@@ -251,7 +251,7 @@ export default function ChatPage() {
 
                 {/* Error banner */}
                 {error && (
-                    <div className="mb-3 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-xl text-xs text-red-300 text-center flex-shrink-0 animate-fade-in">
+                    <div className="mb-3 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-none text-xs text-red-300 text-center flex-shrink-0 animate-fade-in">
                         ⚠️ {error}
                     </div>
                 )}
@@ -266,7 +266,7 @@ export default function ChatPage() {
                     {/* Load more spinner */}
                     {loadingHistory && (
                         <div className="text-center py-4">
-                            <div className="inline-block w-5 h-5 border-2 border-white/20 border-t-primary-400 rounded-full animate-spin" />
+                            <div className="inline-block w-5 h-5 border-2 border-white/20 border-t-primary-400 rounded-none animate-spin" />
                         </div>
                     )}
 
@@ -274,7 +274,7 @@ export default function ChatPage() {
                     {!loadingHistory && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
                             <div className="text-5xl">💬</div>
-                            <p className="text-slate-400 text-sm">No messages yet.</p>
+                            <p className="text-slate-500 text-sm">No messages yet.</p>
                             <p className="text-slate-500 text-xs">Say hello to get started!</p>
                         </div>
                     )}
@@ -302,7 +302,7 @@ export default function ChatPage() {
 
                 {/* Input bar */}
                 <div className="flex-shrink-0 mt-3">
-                    <div className="glass-card px-3 py-3 flex gap-3 items-end">
+                    <div className="card px-3 py-3 flex gap-3 items-end">
                         <textarea
                             ref={inputRef}
                             id="chat-input"
@@ -319,7 +319,7 @@ export default function ChatPage() {
                             id="chat-send-btn"
                             onClick={handleSend}
                             disabled={!inputText.trim() || !isConnected || sending}
-                            className="flex-shrink-0 w-9 h-9 rounded-xl bg-primary-600 hover:bg-primary-500 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                            className="flex-shrink-0 w-9 h-9 rounded-none bg-primary-600 hover:bg-primary-500 disabled:opacity-30 disabled:cursor-not-allowed text-slate-800 flex items-center justify-center transition-all hover:scale-105 active:scale-95"
                             aria-label="Send message"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">

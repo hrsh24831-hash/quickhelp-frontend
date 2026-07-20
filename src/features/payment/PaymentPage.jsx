@@ -103,7 +103,7 @@ export default function PaymentPage() {
         return (
             <div className="min-h-screen">
                 <Navbar />
-                <div className="max-w-md mx-auto mt-20 p-10 glass-card animate-pulse text-center">
+                <div className="max-w-md mx-auto mt-20 p-10 card animate-pulse text-center">
                     <div className="h-6 bg-white/10 rounded w-48 mx-auto mb-4" />
                     <div className="h-4 bg-white/10 rounded w-64 mx-auto mb-2" />
                     <div className="h-4 bg-white/10 rounded w-32 mx-auto" />
@@ -116,9 +116,9 @@ export default function PaymentPage() {
         return (
             <div className="min-h-screen">
                 <Navbar />
-                <div className="max-w-md mx-auto mt-20 p-8 glass-card text-center text-slate-300">
+                <div className="max-w-md mx-auto mt-20 p-8 card text-center text-slate-600">
                     <AlertTriangle size={36} className="mx-auto mb-3 text-amber-500" strokeWidth={1.5} />
-                    <p className="font-semibold text-lg text-white mb-2">Error</p>
+                    <p className="font-semibold text-lg text-slate-800 mb-2">Error</p>
                     <p className="text-sm mb-4">{error}</p>
                     <button onClick={() => navigate('/customer/bookings')} className="btn-secondary py-2 text-sm w-full">
                         Back to Bookings
@@ -137,12 +137,12 @@ export default function PaymentPage() {
             <Navbar />
 
             <main className="max-w-md mx-auto px-4 py-12">
-                <div className="glass-card p-6 animate-fade-in">
+                <div className="card p-6 animate-fade-in">
                     {success ? (
                         <div className="text-center py-6">
                             <PartyPopper size={48} className="mx-auto mb-4 text-emerald-500" strokeWidth={1.5} />
-                            <h2 className="text-2xl font-bold text-white mb-2">Payment Successful!</h2>
-                            <p className="text-slate-400 text-sm mb-6">
+                            <h2 className="text-2xl font-bold text-slate-800 mb-2">Payment Successful!</h2>
+                            <p className="text-slate-500 text-sm mb-6">
                                 Booking {booking?.bookingID} has been successfully paid.
                             </p>
                             <button
@@ -154,27 +154,27 @@ export default function PaymentPage() {
                         </div>
                     ) : (
                         <div>
-                            <h2 className="text-xl font-bold text-white mb-4">Invoice Summary</h2>
-                            <p className="text-slate-400 text-xs font-mono mb-6">{booking?.bookingID}</p>
+                            <h2 className="text-xl font-bold text-slate-800 mb-4">Invoice Summary</h2>
+                            <p className="text-slate-500 text-xs font-mono mb-6">{booking?.bookingID}</p>
 
-                            <div className="space-y-4 mb-6 border-b border-white/10 pb-6">
+                            <div className="space-y-4 mb-6 border-b border-none pb-6">
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-slate-400">Service Fee ({booking?.serviceName || booking?.serviceId?.serviceName})</span>
-                                    <span className="text-white font-medium">{formatCurrency(price)}</span>
+                                    <span className="text-slate-500">Service Fee ({booking?.serviceName || booking?.serviceId?.serviceName})</span>
+                                    <span className="text-slate-800 font-medium">{formatCurrency(price)}</span>
                                 </div>
                                 <div className="flex justify-between text-sm">
-                                    <span className="text-slate-400">GST (18%)</span>
-                                    <span className="text-white font-medium">{formatCurrency(tax)}</span>
+                                    <span className="text-slate-500">GST (18%)</span>
+                                    <span className="text-slate-800 font-medium">{formatCurrency(tax)}</span>
                                 </div>
                             </div>
 
                             <div className="flex justify-between items-center mb-6">
-                                <span className="text-white font-semibold">Total Amount</span>
-                                <span className="text-2xl font-extrabold text-primary-300">{formatCurrency(total)}</span>
+                                <span className="text-slate-800 font-semibold">Total Amount</span>
+                                <span className="text-2xl font-extrabold text-amber-700">{formatCurrency(total)}</span>
                             </div>
 
                             {error && (
-                                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-xs text-red-300 rounded-lg">
+                                <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-xs text-red-300 rounded-none">
                                     {error}
                                 </div>
                             )}
@@ -187,7 +187,7 @@ export default function PaymentPage() {
                             >
                                 {paying ? (
                                     <>
-                                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-none animate-spin" />
                                         <span>Processing…</span>
                                     </>
                                 ) : (

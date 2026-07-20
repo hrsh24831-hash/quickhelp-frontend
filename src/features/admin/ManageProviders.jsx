@@ -46,25 +46,25 @@ export default function ManageProviders() {
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-2xl font-bold text-white mb-1">Manage Providers</h1>
-          <p className="text-slate-400 text-sm">Review, verify, and moderate partner provider accounts</p>
+          <h1 className="text-2xl font-bold text-slate-800 mb-1">Manage Providers</h1>
+          <p className="text-slate-500 text-sm">Review, verify, and moderate partner provider accounts</p>
         </div>
 
         {error && (
-          <div className="glass-card p-5 border-red-500/20 text-red-400 text-center mb-6">{error}</div>
+          <div className="card p-5 border-red-500/20 text-red-400 text-center mb-6">{error}</div>
         )}
 
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map(i => (
-              <div key={i} className="glass-card p-6 h-28 animate-pulse bg-white/5 rounded-2xl" />
+              <div key={i} className="card p-6 h-28 animate-pulse bg-white/5 rounded-none" />
             ))}
           </div>
         ) : providers.length === 0 ? (
-          <div className="glass-card p-12 text-center animate-fade-in">
+          <div className="card p-12 text-center animate-fade-in">
             <div className="text-5xl mb-4">👥</div>
-            <p className="text-white font-semibold mb-1">No providers found</p>
-            <p className="text-slate-400 text-sm">No provider partner accounts exist in the database.</p>
+            <p className="text-slate-800 font-semibold mb-1">No providers found</p>
+            <p className="text-slate-500 text-sm">No provider partner accounts exist in the database.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -72,7 +72,7 @@ export default function ManageProviders() {
               <div
                 key={p._id}
                 id={`provider-card-${p._id}`}
-                className={`glass-card p-5 border-l-4 transition-all ${
+                className={`card p-5 border-l-4 transition-all ${
                   p.isSuspended 
                     ? 'border-l-red-500 bg-red-500/5' 
                     : p.isVerified 
@@ -83,19 +83,19 @@ export default function ManageProviders() {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-white font-semibold text-base">{p.name}</h3>
+                      <h3 className="text-slate-800 font-semibold text-base">{p.name}</h3>
                       {p.isVerified && (
-                        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] px-2 py-0.5 rounded-none font-bold uppercase tracking-wider">
                           ✓ Verified
                         </span>
                       )}
                       {p.isSuspended && (
-                        <span className="bg-red-500/10 text-red-400 border border-red-500/20 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                        <span className="bg-red-500/10 text-red-400 border border-red-500/20 text-[10px] px-2 py-0.5 rounded-none font-bold uppercase tracking-wider">
                           Suspended
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-400 text-xs mt-0.5">
+                    <p className="text-slate-500 text-xs mt-0.5">
                       Email: {p.email} · Phone: {p.phone}
                     </p>
                   </div>
@@ -118,10 +118,10 @@ export default function ManageProviders() {
                       id={`suspend-btn-${p._id}`}
                       onClick={() => handleToggleSuspend(p._id, p.isSuspended)}
                       disabled={acting === p._id}
-                      className={`text-xs px-4 py-2 rounded-xl font-bold transition-all border ${
+                      className={`text-xs px-4 py-2 rounded-none font-bold transition-all border ${
                         p.isSuspended
-                          ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 hover:text-white'
-                          : 'bg-red-500/10 border-red-500/20 text-red-400 hover:bg-red-500/20 hover:text-white'
+                          ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 hover:text-slate-800'
+                          : 'bg-red-500/10 border-red-500/20 text-red-400 hover:bg-red-500/20 hover:text-slate-800'
                       }`}
                     >
                       {acting === p._id 

@@ -49,7 +49,7 @@ export default function TrackingPage() {
         <Navbar />
         <main className="max-w-4xl mx-auto px-4 py-8 animate-pulse text-center">
           <div className="h-8 bg-white/10 rounded w-1/3 mx-auto mb-6" />
-          <div className="h-[400px] bg-white/5 rounded-2xl" />
+          <div className="h-[400px] bg-white/5 rounded-none" />
         </main>
       </div>
     )
@@ -60,9 +60,9 @@ export default function TrackingPage() {
       <div className="min-h-screen">
         <Navbar />
         <main className="max-w-md mx-auto px-4 py-16 text-center">
-          <div className="glass-card p-8">
-            <h1 className="text-xl font-semibold text-white mb-2">Error</h1>
-            <p className="text-slate-400 text-sm mb-6">{error || 'Booking details not available.'}</p>
+          <div className="card p-8">
+            <h1 className="text-xl font-semibold text-slate-800 mb-2">Error</h1>
+            <p className="text-slate-500 text-sm mb-6">{error || 'Booking details not available.'}</p>
             <Link to="/customer/bookings" className="btn-primary py-2 px-5 text-sm">
               Back to Bookings
             </Link>
@@ -79,16 +79,16 @@ export default function TrackingPage() {
       <div className="min-h-screen">
         <Navbar />
         <main className="max-w-md mx-auto px-4 py-16 text-center">
-          <div className="glass-card p-8">
+          <div className="card p-8">
             <div className="text-5xl mb-4">
               {booking.status === 'Completed' ? '✅' : '❌'}
             </div>
-            <h1 className="text-xl font-semibold text-white mb-2">
+            <h1 className="text-xl font-semibold text-slate-800 mb-2">
               {booking.status === 'Completed' ? 'Job Completed' : 'Booking Cancelled'}
             </h1>
-            <p className="text-slate-400 text-sm mb-1">{booking.serviceName}</p>
+            <p className="text-slate-500 text-sm mb-1">{booking.serviceName}</p>
             <p className="text-slate-500 text-xs font-mono mb-6">{booking.bookingID}</p>
-            <p className="text-slate-400 text-sm mb-6">
+            <p className="text-slate-500 text-sm mb-6">
               {booking.status === 'Completed'
                 ? 'This booking has been completed. Live tracking is no longer active.'
                 : 'This booking was cancelled. There is no tracking data available.'}
@@ -138,15 +138,15 @@ export default function TrackingPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-white">Live Tracking</h1>
-              <span className="bg-primary-500/20 text-primary-300 border border-primary-500/30 text-xs px-2.5 py-0.5 rounded-full font-medium">
+              <h1 className="text-2xl font-bold text-slate-800">Live Tracking</h1>
+              <span className="bg-slate-900 text-slate-800 border border-none text-xs px-2.5 py-0.5 rounded-none font-medium">
                 {booking.status}
               </span>
             </div>
-            <p className="text-slate-400 text-sm mt-1">{STATUS_DESCRIPTIONS[booking.status] || 'Service update live stream'}</p>
+            <p className="text-slate-500 text-sm mt-1">{STATUS_DESCRIPTIONS[booking.status] || 'Service update live stream'}</p>
           </div>
 
-          <Link to="/customer/bookings" className="text-sm text-slate-400 hover:text-white transition-colors">
+          <Link to="/customer/bookings" className="text-sm text-slate-500 hover:text-slate-800 transition-colors">
             ← Back to My Bookings
           </Link>
         </div>
@@ -168,21 +168,21 @@ export default function TrackingPage() {
 
           {/* Details Column */}
           <div className="space-y-4">
-            <div className="glass-card p-6">
-              <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Job details</h2>
+            <div className="card p-6">
+              <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Job details</h2>
               
               <div className="space-y-3.5 text-sm">
                 <div>
                   <p className="text-slate-500 text-xs font-mono uppercase">Service Name</p>
-                  <p className="text-white font-medium">{booking.serviceName}</p>
+                  <p className="text-slate-800 font-medium">{booking.serviceName}</p>
                 </div>
                 <div>
                   <p className="text-slate-500 text-xs font-mono uppercase">Booking ID</p>
-                  <p className="text-white font-mono">{booking.bookingID}</p>
+                  <p className="text-slate-800 font-mono">{booking.bookingID}</p>
                 </div>
                 <div>
                   <p className="text-slate-500 text-xs font-mono uppercase">Live ETA</p>
-                  <p className={`text-white font-medium ${liveEtaVal !== null ? 'text-primary-400 font-bold animate-pulse' : ''}`}>
+                  <p className={`text-slate-800 font-medium ${liveEtaVal !== null ? 'text-amber-800 font-bold animate-pulse' : ''}`}>
                     {liveEtaVal !== null ? `${liveEtaVal} min` : `${booking.estimatedArrivalTime} min (Static)`}
                   </p>
                 </div>
@@ -193,9 +193,9 @@ export default function TrackingPage() {
               </div>
             </div>
 
-            <div className="glass-card p-6 border-primary-500/20 bg-primary-500/5">
-              <h3 className="text-xs font-bold text-primary-400 uppercase tracking-wider mb-2">Safety guidelines</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+            <div className="card p-6 border-primary-500/20 bg-primary-500/5">
+              <h3 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">Safety guidelines</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
                 Please verify the provider matches the details displayed. QuickHelp personnel will always present their onboarding credentials before commencing work.
               </p>
             </div>

@@ -54,18 +54,18 @@ export default function ManagePayouts() {
 
             <main className="max-w-4xl mx-auto px-4 py-8">
                 <div className="mb-8">
-                    <h1 className="text-2xl font-bold text-white mb-1">Manage Payouts</h1>
-                    <p className="text-slate-400 text-sm">Review provider payout requests and record manual settlements</p>
+                    <h1 className="text-2xl font-bold text-slate-800 mb-1">Manage Payouts</h1>
+                    <p className="text-slate-500 text-sm">Review provider payout requests and record manual settlements</p>
                 </div>
 
                 {message && (
-                    <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl text-sm">
+                    <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-none text-sm">
                         🎉 {message}
                     </div>
                 )}
 
                 {error && (
-                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-sm">
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 text-red-400 rounded-none text-sm">
                         ⚠️ {error}
                     </div>
                 )}
@@ -73,23 +73,23 @@ export default function ManagePayouts() {
                 {loading ? (
                     <div className="space-y-4">
                         {[1, 2].map(i => (
-                            <div key={i} className="glass-card p-6 animate-pulse h-24" />
+                            <div key={i} className="card p-6 animate-pulse h-24" />
                         ))}
                     </div>
                 ) : payouts.length === 0 ? (
-                    <div className="glass-card p-10 text-center text-slate-400">
+                    <div className="card p-10 text-center text-slate-500">
                         <div className="text-4xl mb-3">💸</div>
                         <p>No payout requests logged in system.</p>
                     </div>
                 ) : (
                     <div className="space-y-4">
                         {payouts.map(p => (
-                            <div key={p._id} className="glass-card p-5 animate-fade-in hover:border-white/20 transition-all">
+                            <div key={p._id} className="card p-5 animate-fade-in hover:border-white/20 transition-all">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                     <div>
                                         <div className="flex items-center gap-3 mb-1.5">
-                                            <span className="text-white font-bold text-lg">{formatCurrency(p.amount)}</span>
-                                            <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${
+                                            <span className="text-slate-800 font-bold text-lg">{formatCurrency(p.amount)}</span>
+                                            <span className={`inline-block px-2.5 py-0.5 rounded-none text-[10px] font-semibold border ${
                                                 p.status === 'settled'
                                                     ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
                                                     : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
@@ -97,14 +97,14 @@ export default function ManagePayouts() {
                                                 {p.status === 'settled' ? 'Settled' : 'Pending Verification'}
                                             </span>
                                         </div>
-                                        <p className="text-slate-300 text-sm font-medium">
+                                        <p className="text-slate-600 text-sm font-medium">
                                             Provider: {p.providerId?.name || 'Unknown'} ({p.providerId?.email})
                                         </p>
                                         <p className="text-slate-500 text-xs mt-1">
                                             Requested At: {new Date(p.requestedAt).toLocaleString()} · {p.bookingIds?.length} booking(s) covered
                                         </p>
                                         {p.status === 'settled' && (
-                                            <div className="mt-2.5 p-2 bg-emerald-500/5 border border-emerald-500/10 rounded-lg text-xs text-emerald-300 font-mono">
+                                            <div className="mt-2.5 p-2 bg-emerald-500/5 border border-emerald-500/10 rounded-none text-xs text-emerald-300 font-mono">
                                                 TxRef: {p.transactionRef} · Settled: {new Date(p.settledAt).toLocaleString()}
                                             </div>
                                         )}
@@ -120,18 +120,18 @@ export default function ManagePayouts() {
                                                             placeholder="Transaction Ref (e.g. TXN12345)"
                                                             value={txRef}
                                                             onChange={(e) => setTxRef(e.target.value)}
-                                                            className="bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-primary-500"
+                                                            className="bg-white/5 border border-none rounded-none px-3 py-1.5 text-xs text-slate-800 outline-none focus:border-slate-900"
                                                         />
                                                         <div className="flex gap-2">
                                                             <button
                                                                 onClick={() => handleSettle(p._id)}
-                                                                className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-1.5 px-3 rounded-lg transition-all"
+                                                                className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-slate-800 font-semibold text-xs py-1.5 px-3 rounded-none transition-all"
                                                             >
                                                                 Settle
                                                             </button>
                                                             <button
                                                                 onClick={() => { setSettlingId(null); setTxRef('') }}
-                                                                className="text-xs text-slate-400 hover:text-white border border-white/10 px-3 py-1.5 rounded-lg"
+                                                                className="text-xs text-slate-500 hover:text-slate-800 border border-none px-3 py-1.5 rounded-none"
                                                             >
                                                                 Cancel
                                                             </button>
@@ -140,7 +140,7 @@ export default function ManagePayouts() {
                                                 ) : (
                                                     <button
                                                         onClick={() => setSettlingId(p._id)}
-                                                        className="inline-flex items-center text-xs font-semibold text-white bg-primary-600 hover:bg-primary-500 px-4 py-2 rounded-xl transition-all"
+                                                        className="inline-flex items-center text-xs font-semibold text-slate-800 bg-primary-600 hover:bg-primary-500 px-4 py-2 rounded-none transition-all"
                                                     >
                                                         Mark Settled
                                                     </button>

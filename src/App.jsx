@@ -44,20 +44,20 @@ import ProtectedRoute  from './components/ProtectedRoute'
 // ── Shared stub for routes not yet built ──────────────────────────
 const Stub = ({ title }) => (
   <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-    <div className="glass-card p-10 max-w-md w-full animate-fade-in">
+    <div className="card p-10 max-w-md w-full animate-fade-in">
       <div className="text-4xl mb-4">🚧</div>
-      <h1 className="text-xl font-semibold text-white mb-2">{title}</h1>
-      <p className="text-slate-400 text-sm">Coming in an upcoming phase.</p>
+      <h1 className="text-xl font-semibold text-slate-800 mb-2">{title}</h1>
+      <p className="text-slate-500 text-sm">Coming in an upcoming phase.</p>
     </div>
   </div>
 )
 
 const Unauthorized = () => (
   <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-    <div className="glass-card p-10 max-w-md w-full animate-fade-in">
+    <div className="card p-10 max-w-md w-full animate-fade-in">
       <div className="text-5xl mb-4">🔒</div>
-      <h1 className="text-xl font-semibold text-white mb-2">Access Denied</h1>
-      <p className="text-slate-400 text-sm">You don't have permission to view this page.</p>
+      <h1 className="text-xl font-semibold text-slate-800 mb-2">Access Denied</h1>
+      <p className="text-slate-500 text-sm">You don't have permission to view this page.</p>
     </div>
   </div>
 )
@@ -90,15 +90,15 @@ const DevLogin = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4">
-      <div className="glass-card p-10 max-w-md w-full animate-fade-in space-y-4">
-        <h1 className="text-xl font-semibold text-white">Dev Login Helper</h1>
+      <div className="card p-10 max-w-md w-full animate-fade-in space-y-4">
+        <h1 className="text-xl font-semibold text-slate-800">Dev Login Helper</h1>
         <button id="dev-login-customer" onClick={() => loginAs('customer')} className="btn-primary w-full">
           Login as Customer
         </button>
         <button id="dev-login-provider" onClick={() => loginAs('provider')} className="btn-secondary w-full">
           Login as Provider
         </button>
-        <button id="dev-login-admin" onClick={() => loginAs('admin')} className="w-full text-sm text-slate-400 hover:text-white border border-white/10 hover:border-white/30 py-2 rounded-lg transition-all">
+        <button id="dev-login-admin" onClick={() => loginAs('admin')} className="w-full text-sm text-slate-500 hover:text-slate-800 border border-none hover:border-white/30 py-2 rounded-none transition-all">
           Login as Admin
         </button>
       </div>

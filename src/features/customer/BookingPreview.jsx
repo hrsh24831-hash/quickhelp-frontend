@@ -222,8 +222,8 @@ export default function BookingPreview() {
       <Navbar />
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-white mb-1">Book a Service</h1>
-          <p className="text-slate-400 text-sm">Configure your booking and choose a delivery address</p>
+          <h1 className="text-2xl font-bold text-slate-800 mb-1">Book a Service</h1>
+          <p className="text-slate-500 text-sm">Configure your booking and choose a delivery address</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -232,32 +232,32 @@ export default function BookingPreview() {
           <div className="space-y-6">
 
             {/* Service config */}
-            <div className="glass-card p-6 space-y-4">
-              <h2 className="text-base font-semibold text-white">Service Configuration</h2>
-              {error && <div className="bg-red-500/10 border border-red-500/20 text-red-300 text-sm px-4 py-2.5 rounded-lg">{error}</div>}
+            <div className="card p-6 space-y-4">
+              <h2 className="text-base font-semibold text-slate-800">Service Configuration</h2>
+              {error && <div className="bg-red-500/10 border border-red-500/20 text-red-300 text-sm px-4 py-2.5 rounded-none">{error}</div>}
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">Service</label>
-                <select id="select-service-input" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors text-sm" value={serviceId} onChange={e => setServiceId(e.target.value)}>
-                  {services.map(s => <option key={s._id} value={s._id} className="bg-slate-900">{s.serviceName}</option>)}
+                <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Service</label>
+                <select id="select-service-input" className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 focus:outline-none focus:border-slate-900 transition-colors text-sm" value={serviceId} onChange={e => setServiceId(e.target.value)}>
+                  {services.map(s => <option key={s._id} value={s._id} className="bg-white text-slate-800">{s.serviceName}</option>)}
                 </select>
               </div>
               <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">Time Slot</label>
-                  <select id="select-time-input" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors text-sm" value={timeSlot} onChange={e => setTimeSlot(e.target.value)}>
-                    {TIME_SLOTS.map(t => <option key={t} value={t} className="bg-slate-900">{t}</option>)}
+                  <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Time Slot</label>
+                  <select id="select-time-input" className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 focus:outline-none focus:border-slate-900 transition-colors text-sm" value={timeSlot} onChange={e => setTimeSlot(e.target.value)}>
+                    {TIME_SLOTS.map(t => <option key={t} value={t} className="bg-white text-slate-800">{t}</option>)}
                   </select>
                 </div>
               </div>
             </div>
 
             {/* Delivery address */}
-            <div className="glass-card p-6 space-y-4">
+            <div className="card p-6 space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-base font-semibold text-white">Delivery Address</h2>
+                <h2 className="text-base font-semibold text-slate-800">Delivery Address</h2>
                 {!showForm && (
                   <button type="button" onClick={() => { setShowForm(true); setForm(EMPTY_FORM); setGeoMsg('') }}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary-300 hover:text-white border border-primary-500/30 hover:border-primary-500/60 bg-primary-500/10 hover:bg-primary-500/20 px-3 py-1.5 rounded-lg transition-all">
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 hover:text-slate-800 border border-none hover:border-primary-500/60 bg-transparent hover:bg-amber-100 px-3 py-1.5 rounded-none transition-all">
                     + Add Address
                   </button>
                 )}
@@ -270,23 +270,23 @@ export default function BookingPreview() {
                     const icon = LABEL_ICONS[addr.label] || '\u{1F4CD}'
                     return (
                       <div key={addr._id} onClick={() => setSelectedAddrId(addr._id)}
-                        className={`relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-all group ${isSelected ? 'border-primary-500/60 bg-primary-500/10 ring-1 ring-primary-500/30' : 'border-white/8 bg-white/3 hover:border-white/20 hover:bg-white/5'}`}>
-                        <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all ${isSelected ? 'border-primary-400 bg-primary-500' : 'border-white/20'}`}>
-                          {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
+                        className={`relative flex items-start gap-3 p-3.5 rounded-none border cursor-pointer transition-all group ${isSelected ? 'border-primary-500/60 bg-primary-500/10 ring-1 ring-primary-500/30' : 'border-white/8 bg-white/3 hover:border-white/20 hover:bg-white/5'}`}>
+                        <div className={`mt-0.5 w-4 h-4 rounded-none border-2 flex-shrink-0 flex items-center justify-center transition-all ${isSelected ? 'border-primary-400 bg-primary-500' : 'border-white/20'}`}>
+                          {isSelected && <div className="w-1.5 h-1.5 bg-white rounded-none" />}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-0.5">
                             <span className="text-sm">{icon}</span>
-                            <span className={`text-xs font-bold uppercase tracking-wider ${isSelected ? 'text-primary-300' : 'text-slate-400'}`}>{addr.label}</span>
+                            <span className={`text-xs font-bold uppercase tracking-wider ${isSelected ? 'text-amber-700' : 'text-slate-500'}`}>{addr.label}</span>
                             {addr.isDefault && <span className="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded font-mono">DEFAULT</span>}
                           </div>
-                          <p className="text-sm text-white font-medium leading-snug">{addr.addressLine}</p>
+                          <p className="text-sm text-slate-800 font-medium leading-snug">{addr.addressLine}</p>
                           {(addr.locality || addr.city) && (
-                            <p className="text-xs text-slate-400 mt-0.5">{[addr.locality, addr.city, addr.pincode].filter(Boolean).join(', ')}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">{[addr.locality, addr.city, addr.pincode].filter(Boolean).join(', ')}</p>
                           )}
                         </div>
                         <button type="button" onClick={e => { e.stopPropagation(); handleDeleteAddress(addr._id) }}
-                          className="opacity-0 group-hover:opacity-100 flex-shrink-0 text-slate-500 hover:text-red-400 transition-all p-1 rounded-lg hover:bg-red-500/10" title="Remove">
+                          className="opacity-0 group-hover:opacity-100 flex-shrink-0 text-slate-500 hover:text-red-400 transition-all p-1 rounded-none hover:bg-red-500/10" title="Remove">
                           <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                             <path fillRule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.58.22-2.365.468A.75.75 0 003 5.41v.538a.75.75 0 00.75.75h12.5A.75.75 0 0017 5.948V5.41a.75.75 0 00-.635-.749A22.1 22.1 0 0014 4.193v-.443A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM5 8a.75.75 0 01.75.75v6.5c0 .414.336.75.75.75h7a.75.75 0 00.75-.75v-6.5A.75.75 0 0115 8a.75.75 0 01.75.75v6.5A2.25 2.25 0 0113.5 17.5h-7A2.25 2.25 0 014.25 15.25v-6.5A.75.75 0 015 8z" clipRule="evenodd"/>
                           </svg>
@@ -306,14 +306,14 @@ export default function BookingPreview() {
               )}
 
               {showForm && (
-                <div className="border border-white/10 rounded-xl p-4 space-y-4 bg-white/3">
+                <div className="border border-none rounded-none p-4 space-y-4 bg-white/3">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="text-sm font-semibold text-white">New Address</p>
-                    <button type="button" onClick={() => { setShowForm(false); setGeoMsg('') }} className="text-slate-500 hover:text-white text-lg leading-none transition-colors">&times;</button>
+                    <p className="text-sm font-semibold text-slate-800">New Address</p>
+                    <button type="button" onClick={() => { setShowForm(false); setGeoMsg('') }} className="text-slate-500 hover:text-slate-800 text-lg leading-none transition-colors">&times;</button>
                   </div>
 
                   <button type="button" id="detect-location-btn" onClick={handleDetectLocation} disabled={geoLoading}
-                    className={`w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold border transition-all ${geoLoading ? 'bg-primary-500/10 border-primary-500/30 text-primary-400 cursor-not-allowed' : 'bg-primary-500/15 border-primary-500/40 text-primary-300 hover:bg-primary-500/25 hover:border-primary-500/70 hover:text-white'}`}>
+                    className={`w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-none text-sm font-semibold border transition-all ${geoLoading ? 'bg-primary-500/10 border-none text-amber-800 cursor-not-allowed' : 'bg-primary-500/15 border-primary-500/40 text-amber-700 hover:bg-primary-500/25 hover:border-primary-500/70 hover:text-slate-800'}`}>
                     {geoLoading ? (
                       <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>Detecting location&hellip;</>
                     ) : (
@@ -322,17 +322,17 @@ export default function BookingPreview() {
                   </button>
 
                   {geoMsg && (
-                    <p className={`text-xs px-3 py-1.5 rounded-lg border ${geoIsOk ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-400 bg-amber-500/10 border-amber-500/20'}`}>
+                    <p className={`text-xs px-3 py-1.5 rounded-none border ${geoIsOk ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-amber-400 bg-amber-500/10 border-amber-500/20'}`}>
                       {geoIsOk ? '\u2713' : '\u26a0\ufe0f'} {geoText}
                     </p>
                   )}
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-2 font-mono uppercase tracking-wide">Label</label>
+                    <label className="block text-xs font-medium text-slate-500 mb-2 font-mono uppercase tracking-wide">Label</label>
                     <div className="flex gap-2">
                       {LABELS.map(l => (
                         <button key={l} type="button" onClick={() => setForm(f => ({ ...f, label: l }))}
-                          className={`flex-1 py-1.5 text-xs font-semibold rounded-lg border transition-all ${form.label === l ? 'border-primary-500/60 bg-primary-500/20 text-primary-300' : 'border-white/10 bg-white/3 text-slate-400 hover:border-white/20 hover:text-white'}`}>
+                          className={`flex-1 py-1.5 text-xs font-semibold rounded-none border transition-all ${form.label === l ? 'border-primary-500/60 bg-slate-900 text-slate-800' : 'border-none bg-white/3 text-slate-500 hover:border-white/20 hover:text-slate-800'}`}>
                           {LABEL_ICONS[l]} {l}
                         </button>
                       ))}
@@ -340,41 +340,41 @@ export default function BookingPreview() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">House / Flat / Building <span className="text-red-400">*</span></label>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">House / Flat / Building <span className="text-red-400">*</span></label>
                     <input id="address-line-input" type="text" placeholder="e.g. Flat 4B, Sunrise Apartments"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-primary-500 transition-colors"
+                      className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 text-sm placeholder-slate-600 focus:outline-none focus:border-slate-900 transition-colors"
                       value={form.addressLine} onChange={e => setForm(f => ({ ...f, addressLine: e.target.value }))} />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">Locality / Area</label>
+                    <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Locality / Area</label>
                     <input id="locality-input" type="text" placeholder="e.g. Rohini, Connaught Place"
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-primary-500 transition-colors"
+                      className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 text-sm placeholder-slate-600 focus:outline-none focus:border-slate-900 transition-colors"
                       value={form.locality} onChange={e => setForm(f => ({ ...f, locality: e.target.value }))} />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">City</label>
+                      <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">City</label>
                       <input id="city-input" type="text" placeholder="e.g. Delhi"
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-primary-500 transition-colors"
+                        className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 text-sm placeholder-slate-600 focus:outline-none focus:border-slate-900 transition-colors"
                         value={form.city} onChange={e => setForm(f => ({ ...f, city: e.target.value }))} />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-slate-400 mb-1.5 font-mono uppercase tracking-wide">Pincode</label>
+                      <label className="block text-xs font-medium text-slate-500 mb-1.5 font-mono uppercase tracking-wide">Pincode</label>
                       <input id="pincode-input" type="text" placeholder="e.g. 110085" maxLength={10}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-primary-500 transition-colors font-mono"
+                        className="w-full bg-white/5 border border-none rounded-none px-4 py-2.5 text-slate-800 text-sm placeholder-slate-600 focus:outline-none focus:border-slate-900 transition-colors font-mono"
                         value={form.pincode} onChange={e => setForm(f => ({ ...f, pincode: e.target.value }))} />
                     </div>
                   </div>
 
-                  {formError && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-1.5">{formError}</p>}
+                  {formError && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-none px-3 py-1.5">{formError}</p>}
 
                   <div className="flex gap-3 pt-1">
                     <button type="button" onClick={() => { setShowForm(false); setGeoMsg('') }}
-                      className="flex-1 py-2 text-sm text-slate-400 hover:text-white border border-white/10 hover:border-white/30 rounded-xl transition-all">Cancel</button>
+                      className="flex-1 py-2 text-sm text-slate-500 hover:text-slate-800 border border-none hover:border-white/30 rounded-none transition-all">Cancel</button>
                     <button id="save-address-btn" type="button" onClick={handleSaveAddress} disabled={formSaving}
-                      className="flex-1 py-2 text-sm font-semibold bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white rounded-xl transition-all disabled:opacity-50">
+                      className="flex-1 py-2 text-sm font-semibold bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-slate-800 rounded-none transition-all disabled:opacity-50">
                       {formSaving ? 'Saving...' : 'Save Address'}
                     </button>
                   </div>
@@ -384,9 +384,9 @@ export default function BookingPreview() {
           </div>
 
           {/* RIGHT */}
-          <div className="glass-card p-6 flex flex-col justify-between">
+          <div className="card p-6 flex flex-col justify-between">
             <div>
-              <h2 className="text-base font-semibold text-white mb-4">Price Estimation Breakdown</h2>
+              <h2 className="text-base font-semibold text-slate-800 mb-4">Price Estimation Breakdown</h2>
               {loading ? (
                 <div className="space-y-4 animate-pulse">
                   <div className="h-4 bg-white/5 w-2/3 rounded" />
@@ -396,14 +396,14 @@ export default function BookingPreview() {
               ) : preview ? (
                 <div className="space-y-4 text-sm">
                   {selectedService && (
-                    <div className="border-b border-white/5 pb-3">
+                    <div className="border-b border-none pb-3">
                       <p className="text-xs text-slate-500 font-mono">Service Selected</p>
-                      <p className="text-white font-medium">{selectedService.serviceName}</p>
-                      <p className="text-slate-400 text-xs mt-1">{selectedService.description}</p>
+                      <p className="text-slate-800 font-medium">{selectedService.serviceName}</p>
+                      <p className="text-slate-500 text-xs mt-1">{selectedService.description}</p>
                     </div>
                   )}
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Base Price</span>
+                    <span className="text-slate-500">Base Price</span>
                     <span className="text-slate-200 font-mono">&#x20B9;{preview.basePrice}</span>
                   </div>
                   {preview.surgeMultiplier > 1 && (
@@ -422,13 +422,13 @@ export default function BookingPreview() {
                     </div>
                   )}
                   <div className="flex justify-between border-t border-white/15 pt-4">
-                    <span className="text-base font-medium text-white">Final Price</span>
-                    <span id="preview-final-price" className="text-xl font-bold text-primary-400 font-mono">&#x20B9;{preview.finalPrice}</span>
+                    <span className="text-base font-medium text-slate-800">Final Price</span>
+                    <span id="preview-final-price" className="text-xl font-bold text-amber-800 font-mono">&#x20B9;{preview.finalPrice}</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-4 text-xs text-slate-400">
+                  <div className="grid grid-cols-2 gap-4 border-t border-none pt-4 text-xs text-slate-500">
                     <div>
                       <p className="font-mono">Est. Arrival</p>
-                      <p className="text-white font-medium mt-0.5">{preview.estimatedArrivalTime} min</p>
+                      <p className="text-slate-800 font-medium mt-0.5">{preview.estimatedArrivalTime} min</p>
                     </div>
                     <div>
                       <p className="font-mono">Demand Level</p>
@@ -436,14 +436,14 @@ export default function BookingPreview() {
                     </div>
                   </div>
                   {activeAddress && (
-                    <div className="mt-2 border-t border-white/5 pt-4">
+                    <div className="mt-2 border-t border-none pt-4">
                       <p className="text-xs text-slate-500 font-mono mb-1">Delivering to</p>
                       <div className="flex items-start gap-2">
                         <span className="text-sm">{LABEL_ICONS[activeAddress.label] || '\u{1F4CD}'}</span>
                         <div>
-                          <p className="text-white text-sm font-medium">{activeAddress.addressLine}</p>
+                          <p className="text-slate-800 text-sm font-medium">{activeAddress.addressLine}</p>
                           {(activeAddress.locality || activeAddress.city) && (
-                            <p className="text-slate-400 text-xs mt-0.5">{[activeAddress.locality, activeAddress.city, activeAddress.pincode].filter(Boolean).join(', ')}</p>
+                            <p className="text-slate-500 text-xs mt-0.5">{[activeAddress.locality, activeAddress.city, activeAddress.pincode].filter(Boolean).join(', ')}</p>
                           )}
                         </div>
                       </div>

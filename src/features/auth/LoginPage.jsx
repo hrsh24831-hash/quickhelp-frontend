@@ -35,31 +35,31 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-dots flex items-center justify-center px-4 relative overflow-hidden">
       {/* Decorative glow orbs */}
-      <div className="glow-orb w-96 h-96 bg-primary-600/20 -top-20 -left-20" />
-      <div className="glow-orb w-64 h-64 bg-purple-900/30 bottom-10 right-10" />
+      <div className="glow-orb w-96 h-96 bg-slate-900/5 -top-20 -left-20" />
+      <div className="glow-orb w-64 h-64 bg-slate-900/5 bottom-10 right-10" />
 
       <div className="relative z-10 w-full max-w-md animate-slide-up">
         {/* Logo / Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 mb-4 shadow-lg animate-glow">
-            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-none bg-gradient-to-br from-primary-500 to-primary-700 mb-4 shadow-none-none animate-glow">
+            <svg className="w-8 h-8 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">QuickHelp</h1>
-          <p className="text-slate-400 text-sm mt-1">Home services, at your doorstep</p>
+          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">QuickHelp</h1>
+          <p className="text-slate-500 text-sm mt-1">Home services, at your doorstep</p>
         </div>
 
         {/* Card */}
-        <div className="glass-card p-8">
-          <h2 className="text-xl font-semibold text-white mb-1">Welcome back</h2>
-          <p className="text-slate-400 text-sm mb-6">
+        <div className="card p-8">
+          <h2 className="text-xl font-semibold text-slate-800 mb-1">Welcome back</h2>
+          <p className="text-slate-500 text-sm mb-6">
             Enter your email and we'll send you a one-time code.
           </p>
 
           <form id="login-form" onSubmit={handleSubmit} noValidate className="space-y-4">
             <div>
-              <label htmlFor="email-input" className="block text-sm font-medium text-slate-300 mb-1.5">
+              <label htmlFor="email-input" className="block text-sm font-medium text-slate-600 mb-1.5">
                 Email address
               </label>
               <input
@@ -70,7 +70,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); setError('') }}
                 placeholder="you@example.com"
-                className="glass-input"
+                className="input"
               />
             </div>
 
@@ -103,7 +103,7 @@ export default function LoginPage() {
 
           <p className="text-slate-500 text-xs text-center mt-6">
             By continuing you agree to our{' '}
-            <span className="text-primary-400 cursor-pointer hover:underline">Terms of Service</span>
+            <span className="text-amber-800 cursor-pointer hover:underline">Terms of Service</span>
           </p>
         </div>
 
@@ -114,9 +114,9 @@ export default function LoginPage() {
             { icon: '🛡️', label: 'Verified workers' },
             { icon: '💰', label: 'Best prices' },
           ].map((f) => (
-            <div key={f.label} className="glass-card p-3 text-center">
+            <div key={f.label} className="card p-3 text-center">
               <div className="text-xl mb-1">{f.icon}</div>
-              <div className="text-xs text-slate-400">{f.label}</div>
+              <div className="text-xs text-slate-500">{f.label}</div>
             </div>
           ))}
         </div>

@@ -10,7 +10,7 @@ const STATUS_COLORS = {
 }
 
 const StatusBadge = ({ status }) => (
-  <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium border capitalize ${STATUS_COLORS[status] || 'bg-slate-500/20 text-slate-300 border-slate-500/30'}`}>
+  <span className={`inline-flex px-2.5 py-0.5 rounded-none text-xs font-medium border capitalize ${STATUS_COLORS[status] || 'bg-slate-500/20 text-slate-600 border-slate-500/30'}`}>
     {status.replace('_', ' ')}
   </span>
 )
@@ -37,50 +37,50 @@ function ResolveModal({ dispute, onClose, onResolved }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="glass-card w-full max-w-md p-7 relative animate-fade-in">
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">×</button>
+      <div className="card w-full max-w-md p-7 relative animate-fade-in">
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-slate-800 text-xl">×</button>
 
-        <h2 className="text-xl font-bold text-white mb-1">Resolve Dispute</h2>
-        <p className="text-slate-400 text-sm mb-5">
+        <h2 className="text-xl font-bold text-slate-800 mb-1">Resolve Dispute</h2>
+        <p className="text-slate-500 text-sm mb-5">
           {dispute.bookingId?.bookingID} · Raised by {dispute.raisedBy?.name}
         </p>
 
-        <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-5 text-sm text-slate-300 max-h-28 overflow-y-auto">
+        <div className="bg-white/5 border border-none rounded-none p-4 mb-5 text-sm text-slate-600 max-h-28 overflow-y-auto">
           <p className="text-xs text-slate-500 uppercase mb-1">Reason</p>
           {dispute.reason}
         </div>
 
         {/* Action */}
-        <label className="block text-xs text-slate-400 uppercase tracking-wide mb-2">Decision</label>
+        <label className="block text-xs text-slate-500 uppercase tracking-wide mb-2">Decision</label>
         <div className="flex gap-3 mb-4">
           {['resolved', 'rejected'].map(s => (
             <button
               key={s}
               onClick={() => setStatus(s)}
-              className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-all capitalize border ${
+              className={`flex-1 py-2 rounded-none text-sm font-semibold transition-all capitalize border ${
                 status === s
                   ? s === 'resolved'
                     ? 'bg-green-500/20 border-green-500/50 text-green-300'
                     : 'bg-red-500/20 border-red-500/50 text-red-300'
-                  : 'border-white/10 text-slate-400 hover:border-white/30'
+                  : 'border-none text-slate-500 hover:border-white/30'
               }`}
             >{s}</button>
           ))}
         </div>
 
-        <label className="block text-xs text-slate-400 uppercase tracking-wide mb-2">Resolution Note</label>
+        <label className="block text-xs text-slate-500 uppercase tracking-wide mb-2">Resolution Note</label>
         <textarea
           value={resolution}
           onChange={e => setResolution(e.target.value)}
           placeholder="Explain the decision to the parties involved…"
           rows={4}
-          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500/50 resize-none mb-4"
+          className="w-full bg-white/5 border border-none rounded-none px-4 py-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-900/50 resize-none mb-4"
         />
 
         {error && <p className="text-red-400 text-xs text-center mb-3">{error}</p>}
 
         <div className="flex gap-3">
-          <button onClick={onClose} className="flex-1 py-2.5 text-sm text-slate-400 border border-white/10 hover:border-white/30 rounded-xl transition-all">
+          <button onClick={onClose} className="flex-1 py-2.5 text-sm text-slate-500 border border-none hover:border-white/30 rounded-none transition-all">
             Cancel
           </button>
           <button
@@ -144,8 +144,8 @@ export default function ManageDisputes() {
 
       <main className="max-w-5xl mx-auto px-4 py-8">
         <div className="mb-8 animate-fade-in">
-          <h1 className="text-2xl font-bold text-white mb-1">Manage Disputes</h1>
-          <p className="text-slate-400 text-sm">Review and resolve customer & provider disputes</p>
+          <h1 className="text-2xl font-bold text-slate-800 mb-1">Manage Disputes</h1>
+          <p className="text-slate-500 text-sm">Review and resolve customer & provider disputes</p>
         </div>
 
         {/* Filter tabs */}
@@ -154,10 +154,10 @@ export default function ManageDisputes() {
             <button
               key={f.value}
               onClick={() => setFilter(f.value)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all border ${
+              className={`px-4 py-1.5 rounded-none text-xs font-medium transition-all border ${
                 filter === f.value
-                  ? 'bg-primary-500/20 border-primary-500/50 text-primary-300'
-                  : 'border-white/10 text-slate-400 hover:border-white/30 hover:text-white'
+                  ? 'bg-primary-500/20 border-primary-500/50 text-amber-700'
+                  : 'border-none text-slate-500 hover:border-white/30 hover:text-slate-800'
               }`}
             >{f.label}</button>
           ))}
@@ -166,7 +166,7 @@ export default function ManageDisputes() {
         {loading ? (
           <div className="space-y-4">
             {[1,2,3].map(i => (
-              <div key={i} className="glass-card p-5 animate-pulse">
+              <div key={i} className="card p-5 animate-pulse">
                 <div className="h-4 bg-white/10 rounded w-48 mb-3" />
                 <div className="h-3 bg-white/10 rounded w-full mb-2" />
                 <div className="h-3 bg-white/10 rounded w-3/4" />
@@ -174,22 +174,22 @@ export default function ManageDisputes() {
             ))}
           </div>
         ) : disputes.length === 0 ? (
-          <div className="glass-card p-12 text-center animate-fade-in">
+          <div className="card p-12 text-center animate-fade-in">
             <div className="text-5xl mb-4">⚖️</div>
-            <p className="text-white font-semibold mb-1">No disputes found</p>
-            <p className="text-slate-400 text-sm">All clear — no open disputes matching this filter.</p>
+            <p className="text-slate-800 font-semibold mb-1">No disputes found</p>
+            <p className="text-slate-500 text-sm">All clear — no open disputes matching this filter.</p>
           </div>
         ) : (
           <div className="space-y-4">
             {disputes.map(d => (
-              <div key={d._id} id={`dispute-${d._id}`} className="glass-card p-5 animate-fade-in">
+              <div key={d._id} id={`dispute-${d._id}`} className="card p-5 animate-fade-in">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <p className="text-white font-semibold">
+                    <p className="text-slate-800 font-semibold">
                       {d.bookingId?.bookingID || 'Booking Unavailable'}
                     </p>
-                    <p className="text-slate-400 text-xs mt-0.5">
-                      Raised by <span className="text-slate-300">{d.raisedBy?.name}</span>
+                    <p className="text-slate-500 text-xs mt-0.5">
+                      Raised by <span className="text-slate-600">{d.raisedBy?.name}</span>
                       {' '}({d.raisedBy?.role})
                       {' · '}
                       {new Date(d.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' })}
@@ -199,15 +199,15 @@ export default function ManageDisputes() {
                 </div>
 
                 {/* Reason */}
-                <p className="text-sm text-slate-300 bg-white/5 border border-white/10 rounded-xl px-4 py-3 mb-3 line-clamp-3">
+                <p className="text-sm text-slate-600 bg-white/5 border border-none rounded-none px-4 py-3 mb-3 line-clamp-3">
                   {d.reason}
                 </p>
 
                 {/* Resolution (if closed) */}
                 {d.resolution && (
-                  <div className="text-xs bg-green-500/5 border border-green-500/20 rounded-xl px-4 py-3 mb-3">
+                  <div className="text-xs bg-green-500/5 border border-green-500/20 rounded-none px-4 py-3 mb-3">
                     <span className="text-green-400 font-semibold uppercase tracking-wide">Resolution: </span>
-                    <span className="text-slate-300">{d.resolution}</span>
+                    <span className="text-slate-600">{d.resolution}</span>
                     {d.resolvedBy && (
                       <span className="text-slate-500"> · by {d.resolvedBy.name}</span>
                     )}

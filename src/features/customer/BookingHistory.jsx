@@ -23,19 +23,19 @@ import DisputeModal from './DisputeModal'
 
 /* ── Status badge ─────────────────────────────────────────────────── */
 const STATUS_CONFIG = {
-  'Requested':       { cls: 'bg-amber-50  text-amber-800  border-amber-200',   dot: 'bg-amber-400'  },
-  'Confirmed':       { cls: 'bg-blue-50   text-blue-800   border-blue-200',    dot: 'bg-blue-400'   },
-  'Worker Assigned': { cls: 'bg-indigo-50 text-indigo-800 border-indigo-200',  dot: 'bg-indigo-500' },
-  'In Progress':     { cls: 'bg-orange-50 text-orange-800 border-orange-200',  dot: 'bg-orange-400' },
-  'Completed':       { cls: 'bg-emerald-50 text-emerald-800 border-emerald-200', dot: 'bg-emerald-500' },
-  'Cancelled':       { cls: 'bg-red-50    text-red-800    border-red-200',     dot: 'bg-red-400'    },
+  'Requested':       { cls: 'bg-transparent  text-amber-800  border-none',   dot: 'bg-slate-900'  },
+  'Confirmed':       { cls: 'bg-transparent   text-blue-800   border-none',    dot: 'bg-blue-400'   },
+  'Worker Assigned': { cls: 'bg-transparent text-amber-900 border-none',  dot: 'bg-slate-900' },
+  'In Progress':     { cls: 'bg-transparent text-orange-800 border-none',  dot: 'bg-orange-400' },
+  'Completed':       { cls: 'bg-transparent text-emerald-800 border-none', dot: 'bg-emerald-500' },
+  'Cancelled':       { cls: 'bg-transparent    text-red-800    border-none',     dot: 'bg-red-400'    },
 }
 
 const StatusBadge = ({ status }) => {
-  const cfg = STATUS_CONFIG[status] || { cls: 'bg-slate-50 text-slate-600 border-slate-200', dot: 'bg-slate-400' }
+  const cfg = STATUS_CONFIG[status] || { cls: 'bg-slate-50 text-slate-600 border-none', dot: 'bg-slate-400' }
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border ${cfg.cls}`}>
-      <span className={`w-1.5 h-1.5 rounded-full ${cfg.dot}`} />
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none text-xs font-semibold border ${cfg.cls}`}>
+      <span className={`w-1.5 h-1.5 rounded-none ${cfg.dot}`} />
       {status}
     </span>
   )
@@ -43,13 +43,13 @@ const StatusBadge = ({ status }) => {
 
 /* ── Action button ────────────────────────────────────────────────── */
 const ActionBtn = ({ icon: Icon, label, onClick, variant = 'ghost', className = '', ...rest }) => {
-  const base = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all'
+  const base = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-semibold transition-all'
   const variants = {
-    ghost:    'text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-slate-700',
-    primary:  'text-indigo-600 border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100',
-    success:  'text-emerald-600 border border-emerald-200 hover:bg-emerald-50',
-    danger:   'text-red-600 border border-red-100 hover:bg-red-50',
-    warning:  'text-amber-600 border border-amber-200 hover:bg-amber-50',
+    ghost:    'text-slate-500 border border-none hover:bg-slate-50 hover:text-slate-700',
+    primary:  'text-amber-600 border border-none bg-transparent/50 hover:bg-amber-100',
+    success:  'text-emerald-600 border border-none hover:bg-transparent',
+    danger:   'text-red-600 border border-red-100 hover:bg-transparent',
+    warning:  'text-amber-600 border border-none hover:bg-transparent',
   }
   return (
     <button onClick={onClick} className={`${base} ${variants[variant]} ${className}`} {...rest}>
@@ -180,7 +180,7 @@ export default function BookingHistory() {
           transition={{ duration: 0.35 }}
           className="mb-8"
         >
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">My Bookings</h1>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">My Bookings</h1>
           <p className="text-slate-500 text-sm mt-1">Track and manage your service requests</p>
         </motion.div>
 
@@ -188,16 +188,16 @@ export default function BookingHistory() {
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map(i => (
-              <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 animate-pulse"
+              <div key={i} className="bg-white border border-none rounded-none p-6 animate-pulse"
                 style={{ boxShadow: '0 4px 20px -2px rgba(0,0,0,0.05)' }}>
                 <div className="flex justify-between mb-4">
-                  <div className="h-5 bg-slate-100 rounded-lg w-40" />
-                  <div className="h-6 bg-slate-100 rounded-lg w-24" />
+                  <div className="h-5 bg-transparent rounded-none w-40" />
+                  <div className="h-6 bg-transparent rounded-none w-24" />
                 </div>
-                <div className="h-3 bg-slate-100 rounded w-56 mb-5" />
+                <div className="h-3 bg-transparent rounded w-56 mb-5" />
                 <div className="flex gap-3">
-                  <div className="h-8 bg-slate-100 rounded-lg w-20" />
-                  <div className="h-8 bg-slate-100 rounded-lg w-16" />
+                  <div className="h-8 bg-transparent rounded-none w-20" />
+                  <div className="h-8 bg-transparent rounded-none w-16" />
                 </div>
               </div>
             ))}
@@ -208,7 +208,7 @@ export default function BookingHistory() {
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white border border-slate-200 rounded-2xl p-14 text-center"
+            className="bg-white border border-none rounded-none p-14 text-center"
             style={{ boxShadow: '0 4px 20px -2px rgba(0,0,0,0.05)' }}
           >
             {emptyAnimData ? (
@@ -216,13 +216,13 @@ export default function BookingHistory() {
                 <Lottie animationData={emptyAnimData} loop />
               </div>
             ) : (
-              <ClipboardList size={48} className="mx-auto mb-5 text-slate-300" strokeWidth={1.5} />
+              <ClipboardList size={48} className="mx-auto mb-5 text-slate-600" strokeWidth={1.5} />
             )}
             <p className="text-slate-800 font-bold text-lg mb-2">No bookings yet</p>
             <p className="text-slate-500 text-sm mb-7">Book your first service to get started.</p>
             <Link
               to="/customer/catalog"
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all"
+              className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-800 text-sm font-semibold px-6 py-2.5 rounded-none transition-all"
             >
               Explore Services
             </Link>
@@ -236,15 +236,15 @@ export default function BookingHistory() {
                 key={b.id || b._id || i}
                 id={`booking-card-${b.bookingID}`}
                 variants={cardVariants}
-                whileHover={{ y: -3, boxShadow: '0 12px 32px -4px rgba(99,102,241,0.10)' }}
-                className="bg-white border border-slate-200 rounded-2xl transition-shadow"
+                whileHover={{ y: -3, boxShadow: '0 12px 32px -4px rgba(245,158,11,0.10)' }}
+                className="bg-white border border-none rounded-none transition-shadow-none"
                 style={{ boxShadow: '0 4px 20px -2px rgba(0,0,0,0.05)' }}
               >
                 {/* ── Card header ── */}
                 <div className="px-6 pt-5 pb-4 flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <h3 className="text-slate-900 font-bold text-base leading-snug truncate">{b.serviceName}</h3>
-                    <p className="text-slate-400 text-[11px] font-mono mt-0.5 tracking-wide">{b.bookingID}</p>
+                    <h3 className="text-slate-800 font-bold text-base leading-snug truncate">{b.serviceName}</h3>
+                    <p className="text-slate-500 text-[11px] font-mono mt-0.5 tracking-wide">{b.bookingID}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     {b.status === 'Completed' && ratedIds[b.id] && (
@@ -261,8 +261,8 @@ export default function BookingHistory() {
                 <div className="px-6 pb-4 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3">
                   {/* Price — typographically prominent, no pill */}
                   <div className="col-span-2 sm:col-span-1">
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-0.5">Amount</p>
-                    <p className="text-slate-900 text-lg font-bold leading-none">
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold mb-0.5">Amount</p>
+                    <p className="text-slate-800 text-lg font-bold leading-none">
                       {formatCurrency(b.finalPrice)}
                     </p>
                     {b.savings > 0 && (
@@ -273,28 +273,28 @@ export default function BookingHistory() {
                   </div>
 
                   <div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-0.5">ETA</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold mb-0.5">ETA</p>
                     <p className="text-slate-700 text-sm font-medium flex items-center gap-1">
-                      <Clock size={12} className="text-slate-400" strokeWidth={2} />
+                      <Clock size={12} className="text-slate-500" strokeWidth={2} />
                       {b.liveETA ?? b.estimatedArrivalTime} min
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-0.5">Time Slot</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold mb-0.5">Time Slot</p>
                     <p className="text-slate-700 text-sm font-medium">{b.timeSlot}</p>
                   </div>
 
                   <div>
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-0.5">Area</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold mb-0.5">Area</p>
                     <p className="text-slate-700 text-sm font-medium">{b.area}</p>
                   </div>
                 </div>
 
                 {/* ── Service address ── */}
                 {b.address?.addressLine && (
-                  <div className="mx-6 mb-4 flex items-start gap-2 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                    <MapPin size={13} className="text-slate-400 mt-0.5 shrink-0" strokeWidth={2} />
+                  <div className="mx-6 mb-4 flex items-start gap-2 p-3 bg-slate-50 rounded-none border border-none">
+                    <MapPin size={13} className="text-slate-500 mt-0.5 shrink-0" strokeWidth={2} />
                     <p className="text-slate-600 text-xs leading-relaxed">
                       {b.address.addressLine}
                       {b.address.locality && `, ${b.address.locality}`}
@@ -317,7 +317,7 @@ export default function BookingHistory() {
                 )}
 
                 {/* ── Divider ── */}
-                <div className="border-t border-slate-100 mx-6" />
+                <div className="border-t border-none mx-6" />
 
                 {/* ── Actions ── */}
                 <div className="px-6 py-3.5 flex flex-wrap items-center gap-2">
@@ -346,7 +346,7 @@ export default function BookingHistory() {
                     <Link
                       id={`track-btn-${b.bookingID}`}
                       to={`/customer/track/${b.id}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-indigo-600 border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-100 transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-semibold text-amber-600 border border-none bg-transparent/50 hover:bg-amber-100 transition-all"
                     >
                       <Bike size={13} strokeWidth={2.5} />
                       Track Live
@@ -357,7 +357,7 @@ export default function BookingHistory() {
                     <Link
                       id={`pay-btn-${b.bookingID}`}
                       to={`/pay/${b.id}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-amber-600 border border-amber-200 hover:bg-amber-50 transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-semibold text-amber-600 border border-none hover:bg-transparent transition-all"
                     >
                       <CreditCard size={13} strokeWidth={2.5} />
                       Pay Now
@@ -378,7 +378,7 @@ export default function BookingHistory() {
                     <Link
                       id={`chat-btn-${b.bookingID}`}
                       to={`/chat/${b.id}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-slate-700 transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-none text-xs font-semibold text-slate-500 border border-none hover:bg-slate-50 hover:text-slate-700 transition-all"
                     >
                       <MessageCircle size={13} strokeWidth={2.5} />
                       Chat

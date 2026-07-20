@@ -74,20 +74,20 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 animate-fade-in">
           <div>
-            <h1 className="text-2xl font-bold text-white mb-1">Admin Dashboard</h1>
-            <p className="text-slate-400 text-sm">Real-time marketplace statistics and actions</p>
+            <h1 className="text-2xl font-bold text-slate-800 mb-1">Admin Dashboard</h1>
+            <p className="text-slate-500 text-sm">Real-time marketplace statistics and actions</p>
           </div>
           <div className="flex gap-3">
             <Link
               to="/admin/revenue"
-              className="px-4 py-2.5 rounded-xl text-sm font-semibold border border-white/10 hover:border-white/20 text-slate-300 hover:text-white transition-all bg-white/5"
+              className="px-4 py-2.5 rounded-none text-sm font-semibold border border-none hover:border-white/20 text-slate-600 hover:text-slate-800 transition-all bg-white/5"
             >
               📊 Detailed Report
             </Link>
             <button
               onClick={handleExportCSV}
               disabled={exporting}
-              className="px-4 py-2.5 rounded-xl text-sm font-semibold btn-primary disabled:opacity-50 flex items-center gap-2"
+              className="px-4 py-2.5 rounded-none text-sm font-semibold btn-primary disabled:opacity-50 flex items-center gap-2"
             >
               📥 {exporting ? 'Exporting…' : 'Export CSV'}
             </button>
@@ -95,13 +95,13 @@ export default function AdminDashboard() {
         </div>
 
         {error && (
-          <div className="glass-card p-5 border-red-500/20 text-red-400 text-center mb-6">{error}</div>
+          <div className="card p-5 border-red-500/20 text-red-400 text-center mb-6">{error}</div>
         )}
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="glass-card p-6 h-32 animate-pulse bg-white/5 rounded-2xl" />
+              <div key={i} className="card p-6 h-32 animate-pulse bg-white/5 rounded-none" />
             ))}
           </div>
         ) : (
@@ -109,50 +109,50 @@ export default function AdminDashboard() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               {/* Stat 1 */}
-              <div className="glass-card p-5 flex items-center justify-between border-blue-500/20">
+              <div className="card p-5 flex items-center justify-between border-blue-500/20">
                 <div>
                   <span className="text-xs text-slate-500 uppercase tracking-wide font-semibold block mb-1">Total Revenue</span>
-                  <span className="text-2xl font-bold text-white">{formatCurrency(stats?.totalPaymentRevenue || 0)}</span>
+                  <span className="text-2xl font-bold text-slate-800">{formatCurrency(stats?.totalPaymentRevenue || 0)}</span>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-xl font-bold">💳</div>
+                <div className="w-12 h-12 rounded-none bg-blue-500/10 flex items-center justify-center text-blue-400 text-xl font-bold">💳</div>
               </div>
 
               {/* Stat 2 */}
-              <div className="glass-card p-5 flex items-center justify-between border-purple-500/20">
+              <div className="card p-5 flex items-center justify-between border-purple-500/20">
                 <div>
                   <span className="text-xs text-slate-500 uppercase tracking-wide font-semibold block mb-1">Total Bookings</span>
-                  <span className="text-2xl font-bold text-white">{stats?.totalBookings || 0}</span>
+                  <span className="text-2xl font-bold text-slate-800">{stats?.totalBookings || 0}</span>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-xl">📋</div>
+                <div className="w-12 h-12 rounded-none bg-purple-500/10 flex items-center justify-center text-purple-400 text-xl">📋</div>
               </div>
 
               {/* Stat 3 */}
-              <div className="glass-card p-5 flex items-center justify-between border-yellow-500/20">
+              <div className="card p-5 flex items-center justify-between border-yellow-500/20">
                 <div>
                   <span className="text-xs text-slate-500 uppercase tracking-wide font-semibold block mb-1">Provider Rating</span>
-                  <span className="text-2xl font-bold text-white">⭐ {stats?.avgProviderRating || '0.0'}</span>
+                  <span className="text-2xl font-bold text-slate-800">⭐ {stats?.avgProviderRating || '0.0'}</span>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl">★</div>
+                <div className="w-12 h-12 rounded-none bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl">★</div>
               </div>
 
               {/* Stat 4 */}
-              <div className="glass-card p-5 flex items-center justify-between border-red-500/20">
+              <div className="card p-5 flex items-center justify-between border-red-500/20">
                 <div>
                   <span className="text-xs text-slate-500 uppercase tracking-wide font-semibold block mb-1">Open Disputes</span>
-                  <span className="text-2xl font-bold text-white">{stats?.totalOpenDisputesCount || 0}</span>
+                  <span className="text-2xl font-bold text-slate-800">{stats?.totalOpenDisputesCount || 0}</span>
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl">⚠️</div>
+                <div className="w-12 h-12 rounded-none bg-red-500/10 flex items-center justify-center text-red-400 text-xl">⚠️</div>
               </div>
             </div>
 
             {/* Chart Section */}
-            <div className="glass-card p-6 mb-8 animate-fade-in">
+            <div className="card p-6 mb-8 animate-fade-in">
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h2 className="text-lg font-bold text-white">Revenue Timeline</h2>
-                  <p className="text-xs text-slate-400">Daily transaction volumes over the last 30 days</p>
+                  <h2 className="text-lg font-bold text-slate-800">Revenue Timeline</h2>
+                  <p className="text-xs text-slate-500">Daily transaction volumes over the last 30 days</p>
                 </div>
-                <div className="text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                <div className="text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-none border border-emerald-500/20">
                   Settled Payouts: {formatCurrency(stats?.totalPayoutsSettled || 0)}
                 </div>
               </div>
@@ -191,16 +191,16 @@ export default function AdminDashboard() {
 
             {/* Quick Links Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <Link to="/admin/services" className="glass-card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
-                <span className="text-slate-400 font-semibold group-hover:text-white text-sm transition-colors">⚙️ Manage Services</span>
+              <Link to="/admin/services" className="card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
+                <span className="text-slate-500 font-semibold group-hover:text-slate-800 text-sm transition-colors">⚙️ Manage Services</span>
                 <span className="text-xs text-slate-500">Configure listing inventory & pricing models</span>
               </Link>
-              <Link to="/admin/providers" className="glass-card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
-                <span className="text-slate-400 font-semibold group-hover:text-white text-sm transition-colors">👤 Manage Providers</span>
+              <Link to="/admin/providers" className="card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
+                <span className="text-slate-500 font-semibold group-hover:text-slate-800 text-sm transition-colors">👤 Manage Providers</span>
                 <span className="text-xs text-slate-500">Suspend/verify provider partner registrations</span>
               </Link>
-              <Link to="/admin/disputes" className="glass-card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
-                <span className="text-slate-400 font-semibold group-hover:text-white text-sm transition-colors">⚖️ Manage Disputes</span>
+              <Link to="/admin/disputes" className="card p-5 hover:border-white/20 transition-all flex flex-col justify-between h-32 group">
+                <span className="text-slate-500 font-semibold group-hover:text-slate-800 text-sm transition-colors">⚖️ Manage Disputes</span>
                 <span className="text-xs text-slate-500">Review open tickets and issue resolutions</span>
               </Link>
             </div>

@@ -14,9 +14,9 @@ const ROLES = [
       </svg>
     ),
     perks: ['Instant booking', 'Cluster discounts', 'Real-time tracking'],
-    gradient: 'from-blue-500/20 to-cyan-500/10',
-    border:   'border-blue-500/30 hover:border-blue-400/60',
-    glow:     'rgba(59,130,246,0.15)',
+    gradient: 'from-amber-500/10 to-yellow-500/5',
+    border:   'border-none hover:border-amber-400',
+    glow:     'rgba(245,158,11,0.15)',
   },
   {
     id: 'provider',
@@ -28,9 +28,9 @@ const ROLES = [
       </svg>
     ),
     perks: ['Flexible hours', 'Direct payouts', 'Grow your business'],
-    gradient: 'from-primary-500/20 to-purple-500/10',
-    border:   'border-primary-500/30 hover:border-primary-400/60',
-    glow:     'rgba(124,58,237,0.15)',
+    gradient: 'from-amber-600/10 to-amber-500/5',
+    border:   'border-none hover:border-amber-400',
+    glow:     'rgba(245,158,11,0.20)',
   },
 ]
 
@@ -67,21 +67,21 @@ export default function RoleSelectPage() {
   return (
     <div className="min-h-screen bg-dots flex items-center justify-center px-4 relative overflow-hidden">
       {/* Glow orbs */}
-      <div className="glow-orb w-72 h-72 bg-primary-700/20 top-1/4 -left-20" />
-      <div className="glow-orb w-56 h-56 bg-blue-900/20 bottom-1/4 -right-16" />
+      <div className="glow-orb w-72 h-72 bg-slate-900/5 top-1/4 -left-20" />
+      <div className="glow-orb w-56 h-56 bg-slate-900/5 bottom-1/4 -right-16" />
 
       <div className="relative z-10 w-full max-w-lg animate-slide-up">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 mb-4 shadow-lg">
-            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-none bg-gradient-to-br from-primary-500 to-primary-700 mb-4 shadow-none-none">
+            <svg className="w-8 h-8 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-2xl font-bold text-slate-800">
             Welcome{user?.name ? `, ${user.name}` : ''}!
           </h1>
-          <p className="text-slate-400 text-sm mt-1">How will you be using QuickHelp?</p>
+          <p className="text-slate-500 text-sm mt-1">How will you be using QuickHelp?</p>
         </div>
 
         {/* Role cards */}
@@ -94,7 +94,7 @@ export default function RoleSelectPage() {
                 id={`role-card-${role.id}`}
                 onClick={() => { setSelected(role.id); setError('') }}
                 className={`
-                  glass-card p-6 text-left transition-all duration-200 cursor-pointer w-full
+                  card p-6 text-left transition-all duration-200 cursor-pointer w-full
                   bg-gradient-to-br ${role.gradient} ${role.border} border
                   ${isSelected ? 'scale-[1.01]' : 'hover:scale-[1.005]'}
                 `}
@@ -102,27 +102,27 @@ export default function RoleSelectPage() {
               >
                 <div className="flex items-start gap-4">
                   {/* Icon */}
-                  <div className={`flex-shrink-0 p-3 rounded-xl ${isSelected ? 'bg-white/15 text-white' : 'bg-white/5 text-slate-400'} transition-all`}>
+                  <div className={`flex-shrink-0 p-3 rounded-none ${isSelected ? 'bg-white/15 text-slate-800' : 'bg-white/5 text-slate-500'} transition-all`}>
                     {role.icon}
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
-                      <h3 className={`font-semibold text-lg ${isSelected ? 'text-white' : 'text-slate-200'}`}>
+                      <h3 className={`font-semibold text-lg ${isSelected ? 'text-slate-800' : 'text-slate-200'}`}>
                         {role.label}
                       </h3>
                       {/* Radio indicator */}
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
+                      <div className={`w-5 h-5 rounded-none border-2 flex items-center justify-center flex-shrink-0 transition-all ${
                         isSelected ? 'border-primary-400 bg-primary-500' : 'border-slate-600'
                       }`}>
-                        {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                        {isSelected && <div className="w-2 h-2 rounded-none bg-white" />}
                       </div>
                     </div>
-                    <p className="text-slate-400 text-sm mb-3">{role.subtitle}</p>
+                    <p className="text-slate-500 text-sm mb-3">{role.subtitle}</p>
                     <ul className="space-y-1">
                       {role.perks.map((p) => (
-                        <li key={p} className="flex items-center gap-1.5 text-xs text-slate-400">
+                        <li key={p} className="flex items-center gap-1.5 text-xs text-slate-500">
                           <svg className="w-3.5 h-3.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>

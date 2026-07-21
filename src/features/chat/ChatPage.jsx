@@ -27,23 +27,29 @@ function MessageBubble({ msg, isOwn }) {
     const isRead = msg.readBy && msg.readBy.length > 0
 
     return (
-        <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} mb-1.5`}>
+        <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} mb-2`}>
             <div
-                className={`max-w-xs lg:max-w-md px-3.5 py-2.5 rounded-none text-sm leading-relaxed ${
+                className={`max-w-xs lg:max-w-md px-4 py-2.5 text-sm leading-relaxed ${
                     isOwn
-                        ? 'bg-primary-600 text-slate-800 rounded-br-sm'
-                        : 'bg-white/10 text-slate-200 rounded-bl-sm'
+                        ? 'bg-slate-900 text-white rounded-2xl rounded-br-xs shadow-sm'
+                        : 'bg-slate-100 border border-slate-200/90 text-slate-800 rounded-2xl rounded-bl-xs shadow-sm'
                 }`}
             >
                 {!isOwn && (
-                    <p className="text-xs text-amber-700 font-semibold mb-0.5">{msg.senderName}</p>
+                    <p className="text-xs text-amber-700 font-bold mb-0.5">{msg.senderName}</p>
                 )}
                 <p style={{ wordBreak: 'break-word' }}>{msg.text}</p>
-                <div className={`flex items-center gap-1 mt-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
-                    <span className="text-xs opacity-50">{formatTime(msg.createdAt)}</span>
+                <div className={`flex items-center gap-1.5 mt-1 ${isOwn ? 'justify-end' : 'justify-start'}`}>
+                    <span className={`text-[10px] ${isOwn ? 'text-slate-300 opacity-80' : 'text-slate-400'}`}>
+                        {formatTime(msg.createdAt)}
+                    </span>
                     {isOwn && (
-                        <span className={`text-xs ${isRead ? 'text-blue-300' : 'text-slate-800/40'}`}>
-                            {isRead ? '✓✓' : '✓'}
+                        <span className="text-[11px] font-bold">
+                            {isRead ? (
+                                <span className="text-amber-400">✓✓</span>
+                            ) : (
+                                <span className="text-slate-400">✓</span>
+                            )}
                         </span>
                     )}
                 </div>
@@ -56,9 +62,9 @@ function MessageBubble({ msg, isOwn }) {
 function DateSeparator({ label }) {
     return (
         <div className="flex items-center gap-3 my-4 px-2">
-            <div className="flex-1 h-px bg-white/10" />
-            <span className="text-xs text-slate-500 font-medium">{label}</span>
-            <div className="flex-1 h-px bg-white/10" />
+            <div className="flex-1 h-px bg-slate-200" />
+            <span className="text-xs text-slate-500 font-medium px-3 py-0.5 bg-slate-100 rounded-full border border-slate-200/80">{label}</span>
+            <div className="flex-1 h-px bg-slate-200" />
         </div>
     )
 }
@@ -68,13 +74,13 @@ function TypingIndicator({ typingUsers }) {
     if (!typingUsers.length) return null
     const names = typingUsers.map(u => u.userName).join(', ')
     return (
-        <div className="flex items-center gap-2 px-1 py-2">
+        <div className="flex items-center gap-2 px-3 py-1.5 my-1 bg-slate-100 border border-slate-200/60 rounded-full w-fit">
             <div className="flex gap-1">
-                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-1.5 h-1.5 rounded-none bg-slate-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
-            <span className="text-xs text-slate-500 italic">{names} {typingUsers.length === 1 ? 'is' : 'are'} typing…</span>
+            <span className="text-xs text-slate-600 italic font-medium">{names} {typingUsers.length === 1 ? 'is' : 'are'} typing…</span>
         </div>
     )
 }
@@ -82,12 +88,12 @@ function TypingIndicator({ typingUsers }) {
 // ─── Connection badge ─────────────────────────────────────────────────────────
 function ConnectionBadge({ isConnected }) {
     return (
-        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none text-xs font-medium border ${
+        <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-none text-xs font-semibold border ${
             isConnected
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-                : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
+                ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                : 'bg-amber-50 border-amber-200 text-amber-700'
         }`}>
-            <span className={`w-1.5 h-1.5 rounded-none ${isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-slate-900'}`} />
+            <span className={`w-1.5 h-1.5 rounded-full ${isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
             {isConnected ? 'Live' : 'Reconnecting…'}
         </div>
     )
@@ -210,27 +216,27 @@ export default function ChatPage() {
         : '…'
 
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen bg-slate-50 flex flex-col">
             <Navbar />
 
             {/* Chat Container */}
-            <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-6 flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
+            <main className="flex-1 max-w-3xl w-full mx-auto px-4 py-4 flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
 
                 {/* Header */}
-                <div className="card px-5 py-4 mb-4 flex items-center justify-between animate-fade-in flex-shrink-0">
+                <div className="card px-5 py-3.5 mb-3 flex items-center justify-between animate-fade-in flex-shrink-0 bg-white border border-slate-200 shadow-sm">
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => navigate(-1)}
-                            className="text-slate-500 hover:text-slate-800 transition-colors text-xl leading-none"
+                            className="text-slate-500 hover:text-slate-900 transition-colors text-xl leading-none"
                             aria-label="Go back"
                         >
                             ←
                         </button>
                         <div>
-                            <p className="text-slate-800 font-semibold text-sm">
+                            <p className="text-slate-900 font-bold text-sm">
                                 💬 {bookingLoading ? '…' : (booking?.serviceName || booking?.serviceId?.serviceName || 'Booking Chat')}
                             </p>
-                            <p className="text-slate-500 text-xs mt-0.5">
+                            <p className="text-slate-500 text-xs mt-0.5 font-medium">
                                 Chat with {partnerName}
                                 {booking?.bookingID ? ` · ${booking.bookingID}` : ''}
                             </p>
@@ -241,7 +247,7 @@ export default function ChatPage() {
                         {booking && ['Worker Assigned', 'In Progress'].includes(booking.status) && user?.role === 'customer' && (
                             <Link
                                 to={`/customer/track/${bookingId}`}
-                                className="inline-flex items-center text-xs text-amber-700 hover:text-slate-800 border border-none hover:border-primary-500/60 bg-primary-500/10 hover:bg-primary-500/25 px-3 py-1.5 rounded-none transition-all"
+                                className="inline-flex items-center text-xs font-semibold text-amber-800 hover:text-slate-900 border border-amber-200 bg-amber-50 hover:bg-amber-100 px-3 py-1.5 rounded-none transition-all"
                             >
                                 🛵 Track
                             </Link>
@@ -251,14 +257,14 @@ export default function ChatPage() {
 
                 {/* Error banner */}
                 {error && (
-                    <div className="mb-3 px-4 py-2 bg-red-500/10 border border-red-500/30 rounded-none text-xs text-red-300 text-center flex-shrink-0 animate-fade-in">
+                    <div className="mb-3 px-4 py-2 bg-red-50 border border-red-200 rounded-none text-xs font-medium text-red-700 text-center flex-shrink-0 animate-fade-in">
                         ⚠️ {error}
                     </div>
                 )}
 
                 {/* Messages area */}
                 <div
-                    className="flex-1 overflow-y-auto px-2 pb-2 scroll-smooth"
+                    className="flex-1 overflow-y-auto px-4 py-3 bg-white border border-slate-200 shadow-sm scroll-smooth"
                     onScroll={handleScroll}
                     style={{ minHeight: 0 }}
                     id="chat-messages-container"
@@ -266,7 +272,7 @@ export default function ChatPage() {
                     {/* Load more spinner */}
                     {loadingHistory && (
                         <div className="text-center py-4">
-                            <div className="inline-block w-5 h-5 border-2 border-white/20 border-t-primary-400 rounded-none animate-spin" />
+                            <div className="inline-block w-5 h-5 border-2 border-slate-200 border-t-amber-600 rounded-full animate-spin" />
                         </div>
                     )}
 
@@ -274,8 +280,8 @@ export default function ChatPage() {
                     {!loadingHistory && messages.length === 0 && (
                         <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
                             <div className="text-5xl">💬</div>
-                            <p className="text-slate-500 text-sm">No messages yet.</p>
-                            <p className="text-slate-500 text-xs">Say hello to get started!</p>
+                            <p className="text-slate-700 font-medium text-sm">No messages yet.</p>
+                            <p className="text-slate-400 text-xs">Say hello to get started!</p>
                         </div>
                     )}
 
@@ -302,7 +308,7 @@ export default function ChatPage() {
 
                 {/* Input bar */}
                 <div className="flex-shrink-0 mt-3">
-                    <div className="card px-3 py-3 flex gap-3 items-end">
+                    <div className="card px-3 py-2.5 flex gap-3 items-end bg-white border border-slate-200 shadow-sm">
                         <textarea
                             ref={inputRef}
                             id="chat-input"
@@ -312,14 +318,14 @@ export default function ChatPage() {
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
                             disabled={!isConnected}
-                            className="flex-1 resize-none bg-transparent text-slate-200 placeholder-slate-500 text-sm outline-none py-1.5 min-h-[36px] max-h-[120px] overflow-y-auto disabled:opacity-40"
+                            className="flex-1 resize-none bg-transparent text-slate-900 placeholder-slate-400 text-sm outline-none py-1.5 min-h-[38px] max-h-[120px] overflow-y-auto disabled:opacity-40"
                             style={{ lineHeight: '1.5' }}
                         />
                         <button
                             id="chat-send-btn"
                             onClick={handleSend}
                             disabled={!inputText.trim() || !isConnected || sending}
-                            className="flex-shrink-0 w-9 h-9 rounded-none bg-primary-600 hover:bg-primary-500 disabled:opacity-30 disabled:cursor-not-allowed text-slate-800 flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                            className="flex-shrink-0 w-9 h-9 rounded-none bg-slate-900 hover:bg-slate-800 disabled:opacity-30 disabled:cursor-not-allowed text-white flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
                             aria-label="Send message"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
@@ -332,3 +338,4 @@ export default function ChatPage() {
         </div>
     )
 }
+

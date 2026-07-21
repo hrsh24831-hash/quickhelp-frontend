@@ -338,8 +338,8 @@ export default function BookingPreview() {
                     <div className="flex gap-2">
                       {LABELS.map(l => (
                         <button key={l} type="button" onClick={() => setForm(f => ({ ...f, label: l }))}
-                          className={`flex-1 py-1.5 text-xs font-semibold rounded-none border transition-all ${form.label === l ? 'border-primary-500/60 bg-slate-900 text-slate-800' : 'border-none bg-white/3 text-slate-500 hover:border-white/20 hover:text-slate-800'}`}>
-                          {LABEL_ICONS[l]} {l}
+                          className={`flex-1 py-1.5 text-xs font-semibold rounded-none border flex items-center justify-center gap-1.5 transition-all ${form.label === l ? 'border-primary-500/60 bg-slate-900 text-slate-800' : 'border-none bg-white/3 text-slate-500 hover:border-white/20 hover:text-slate-800'}`}>
+                          {getAddressIcon(l)} {l}
                         </button>
                       ))}
                     </div>
@@ -445,7 +445,7 @@ export default function BookingPreview() {
                     <div className="mt-2 border-t border-none pt-4">
                       <p className="text-xs text-slate-500 font-mono mb-1">Delivering to</p>
                       <div className="flex items-start gap-2">
-                        <span className="text-sm">{LABEL_ICONS[activeAddress.label] || '\u{1F4CD}'}</span>
+                        <span className="mt-0.5">{getAddressIcon(activeAddress.label)}</span>
                         <div>
                           <p className="text-slate-800 text-sm font-medium">{activeAddress.addressLine}</p>
                           {(activeAddress.locality || activeAddress.city) && (
